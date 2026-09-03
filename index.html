@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>הכנת הכלי לראש השנה — מסע פנימי יומי בעקבות בעל הסולם</title>
+  
+  <!-- Google Fonts for High-Quality Hebrew Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-warm">
+
+  <!-- Header / Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-feather-pointed"></i>
+        </div>
+        <div class="brand-text">
+          <h1>הכנת הכלי לראש השנה</h1>
+          <span class="sub-title">עבודת הכנה יומית לפי משנת בעל הסולם</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Text Size Control -->
+        <div class="control-group">
+          <button id="btn-font-dec" class="ctrl-btn" title="הקטן גופן"><i class="fa-solid fa-minus"></i> <span style="font-size: 0.8rem;">א</span></button>
+          <button id="btn-font-inc" class="ctrl-btn" title="הגדל גופן"><i class="fa-solid fa-plus"></i> <span style="font-size: 1.1rem; font-weight: bold;">א</span></button>
+        </div>
+
+        <!-- Theme Mode Selector (Day / Warm Parchment / Night) -->
+        <div class="theme-segmented-control" id="theme-selector" role="radiogroup" aria-label="בחירת מצב תצוגה">
+          <button class="theme-seg-btn" data-theme="theme-light" title="מצב יום בהיר">
+            <i class="fa-solid fa-sun"></i>
+            <span>יום</span>
+          </button>
+          <button class="theme-seg-btn active" data-theme="theme-warm" title="מצב לימוד חם (קלף נעים)">
+            <i class="fa-solid fa-book-open"></i>
+            <span>לימוד חם</span>
+          </button>
+          <button class="theme-seg-btn" data-theme="theme-dark" title="מצב לילה כהה (קריאה בחושך)">
+            <i class="fa-solid fa-moon"></i>
+            <span>מצב לילה</span>
+          </button>
+        </div>
+
+        <!-- Print / Export -->
+        <button id="btn-export-journal" class="btn btn-secondary" title="שמור והורד את היומן האישי שלי">
+          <i class="fa-solid fa-book-bookmark"></i>
+          <span>היומן שלי</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="app-layout">
+    
+    <!-- Sidebar / Days Navigation -->
+    <aside class="days-sidebar">
+      <div class="sidebar-header">
+        <h3><i class="fa-regular fa-calendar-days"></i> תהליך ההכנה</h3>
+        <span class="badge-status">אלול תשפ"ו</span>
+      </div>
+
+      <!-- Introduction Tab Button -->
+      <button class="nav-item" data-target="intro-view" id="nav-btn-intro">
+        <div class="nav-icon"><i class="fa-solid fa-compass"></i></div>
+        <div class="nav-info">
+          <div class="nav-title">מבוא והדרך</div>
+          <div class="nav-subtitle">מטרת המסע והבנת התהליך</div>
+        </div>
+      </button>
+
+      <div class="days-list" id="days-list-container">
+        <!-- Day 1 Button -->
+        <button class="nav-item active" data-target="day-1" id="nav-btn-day1">
+          <div class="day-number">יום 1</div>
+          <div class="nav-info">
+            <div class="nav-title">מה הם "חיים"?</div>
+            <div class="nav-meta">3.9.2026 • שמעתי קכ"ב</div>
+          </div>
+          <span class="status-indicator ready"><i class="fa-solid fa-check"></i></span>
+        </button>
+
+        <!-- Upcoming days placeholders -->
+        <div class="future-days-divider">הימים הבאים בתהליך</div>
+        
+        <div class="nav-item disabled" title="יעודכן ביום הבא">
+          <div class="day-number">יום 2</div>
+          <div class="nav-info">
+            <div class="nav-title">יום ההכנה השני</div>
+            <div class="nav-meta">יעודכן בהמשך המסע</div>
+          </div>
+          <span class="status-indicator locked"><i class="fa-solid fa-lock"></i></span>
+        </div>
+
+        <div class="nav-item disabled" title="יעודכן בהמשך">
+          <div class="day-number">יום 3</div>
+          <div class="nav-info">
+            <div class="nav-title">יום ההכנה השלישי</div>
+            <div class="nav-meta">יעודכן בהמשך המסע</div>
+          </div>
+          <span class="status-indicator locked"><i class="fa-solid fa-lock"></i></span>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="quote-box">
+          <i class="fa-solid fa-quote-right quote-mark"></i>
+          <p>"תפילה צריך להיות בלב, שהלב יסכים למה שהאדם מדבר בפה."</p>
+          <span class="quote-author">— בעל הסולם, שמעתי קכ"ב</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content-viewport" id="content-viewport">
+      
+      <!-- INTRO VIEW -->
+      <section id="intro-view" class="content-section">
+        <div class="hero-card">
+          <div class="hero-badge"><i class="fa-solid fa-seedling"></i> פתח דבר למסע הפנימי</div>
+          <h2 class="hero-title">הכנת הכלי לראש השנה</h2>
+          <p class="hero-lead">
+            ברוך הבא למסע ההכנה הפנימי לקראת ראש השנה והימים הנוראים. בכל בוקר עד ערב ראש השנה, נעבור יחד עבודת הכנה יומית ממוקדת המבוססת על מקורות בעל הסולם בלבד — במטרה לבנות, להכשיר ולזכך את הכלי הרוחני והרצון שבלב לקראת השנה החדשה.
+          </p>
+
+          <div class="pillars-grid">
+            <div class="pillar-card">
+              <div class="pillar-icon"><i class="fa-solid fa-book-open"></i></div>
+              <h4>מקור אותנטי בלבד</h4>
+              <p>לימוד ממוקד וישיר מתוך כתבי בעל הסולם (מאמרי "שמעתי", אגרות ומאמרי הכנה לתפילה וימי אלול).</p>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-icon"><i class="fa-solid fa-lightbulb"></i></div>
+              <h4>הסבר ובירור פנימי</h4>
+              <p>פירוק עמוק של תרמיות האגו, חשיפת הרצון האמיתי והבנת ההבדל המהותי בין קבלה לעצמו לבין השפעה.</p>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-icon"><i class="fa-solid fa-pen-fancy"></i></div>
+              <h4>תרגול מעשי להכנת הכלי</h4>
+              <p>שלבי עבודה מוגדרים: כתיבה ללא שיפוט, שאלות מבררות, תרגול התבוננות יומי ויומן סיכום לילה.</p>
+            </div>
+          </div>
+
+          <div class="journey-structure-box">
+            <h3><i class="fa-solid fa-route"></i> כיצד בנוי כל יום לימוד?</h3>
+            <div class="structure-steps">
+              <div class="s-step">
+                <span class="s-num">1</span>
+                <div><strong>המאמר והמקור:</strong> קריאה מעמיקה ברעיון המרכזי מכתבי בעל הסולם.</div>
+              </div>
+              <div class="s-step">
+                <span class="s-num">2</span>
+                <div><strong>בירור התודעה:</strong> זיהוי הפער בין הדיבור בפה לרצון האמיתי שבלב.</div>
+              </div>
+              <div class="s-step">
+                <span class="s-num">3</span>
+                <div><strong>עבודת הכלי (תרגול):</strong> תרגול מעשי וכתיבה אישית לבירור השורשים והרצונות.</div>
+              </div>
+              <div class="s-step">
+                <span class="s-num">4</span>
+                <div><strong>התבוננות יומית:</strong> תרגול מודעות בזמן אמת במהלך הפעילות היומיומית.</div>
+              </div>
+              <div class="s-step">
+                <span class="s-num">5</span>
+                <div><strong>סיכום לילה וחברותא:</strong> משפטי השלמה וכתיבת חמשת הרצונות האמיתיים.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-banner">
+            <div class="cta-text">
+              <h3>מוכן להתחיל את ההכנה?</h3>
+              <p>התחל כעת עם יום 1 — בירור השאלה היסודית: מה הם באמת "חיים"?</p>
+            </div>
+            <button class="btn btn-primary" onclick="switchTab('day-1')">
+              <span>מעבר ליום 1</span>
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- DAY 1 VIEW -->
+      <section id="day-1" class="content-section active">
+        
+        <!-- Day Header Card -->
+        <div class="day-header-card">
+          <div class="day-badge-row">
+            <span class="badge badge-gold"><i class="fa-solid fa-calendar-check"></i> הכנת הכלי לראש השנה — יום 1</span>
+            <span class="badge badge-date"><i class="fa-regular fa-clock"></i> 3.9.2026 • כ"ב אלול</span>
+            <a href="https://kabbalah.academy/he/library/sources/articles/386/" target="_blank" rel="noopener noreferrer" class="badge badge-source" title="לפתיחת המאמר המקורי ב-kabbalah.academy">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> מקור: שמעתי קכ"ב — "להבין מה שמבואר בשולחן ערוך"
+            </a>
+          </div>
+
+          <h2 class="day-main-title">מה הם "חיים"?</h2>
+          <p class="day-lead-text">
+            המאמר שלנו להיום הוא <strong>שמעתי קכ"ב — "להבין מה שמבואר בשולחן ערוך"</strong>. הוא נרשם מפי בעל הסולם בערב שבת ניצבים, כ"ב אלול תש"ב, והוא עוסק במפורש בהכנה לתפילות הימים הנוראים.
+          </p>
+          <div class="study-alert">
+            <i class="fa-solid fa-heart-pulse alert-icon"></i>
+            <div>
+              <strong>עצה לדרך:</strong> אני מציע שהיום לא נרוץ הלאה. אם הנקודה הזאת תיכנס ללב, היא יכולה לשנות את כל ראש השנה שלנו.
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Body: Section 1 -->
+        <article class="study-article">
+          
+          <!-- Section 1 -->
+          <div class="section-block">
+            <div class="section-number">1</div>
+            <div class="section-content">
+              <h3 class="section-title">בעל הסולם מתחיל ממשהו שנראה כמעט טכני</h3>
+              <p>
+                הוא אומר שצריך לעבור מראש על תפילות הימים הנוראים, כדי שכאשר האדם יגיע לראש השנה הוא כבר יהיה <em>"זקן ורגיל בתפילה"</em>. אבל מיד הוא מסביר שלא מדובר רק בהיכרות טכנית עם המחזור.
+              </p>
+              
+              <div class="quote-card">
+                <div class="quote-text">
+                  "תפילה צריך להיות בלב."<br>
+                  "שהלב יסכים למה שהאדם מדבר בפה."
+                </div>
+                <div class="quote-cite">
+                  <a href="https://kabbalah.academy/he/library/sources/articles/386/" target="_blank" rel="noopener noreferrer">בעל הסולם — שמעתי קכ"ב</a>
+                </div>
+              </div>
+
+              <p>
+                זאת נקודת הפתיחה שלנו. בעל הסולם אומר בעצם: <strong>אל תחכה לראש השנה כדי לגלות מה אתה באמת מבקש.</strong>
+              </p>
+              <p>
+                כי אפשר לעמוד בבית הכנסת, להתרגש מהמחזור, לשמוע את החזן, לומר <em>"זכרנו לחיים"</em>, <em>"כתבנו לחיים"</em>, להרגיש קדושה עצומה — ובאותו זמן הלב בכלל מבקש משהו אחר:
+              </p>
+
+              <div class="comparison-grid">
+                <div class="comp-card lip-side">
+                  <div class="comp-header"><i class="fa-regular fa-comment-dots"></i> הפה אומר:</div>
+                  <div class="comp-body">
+                    <span class="highlight-big">"חַיִּים"</span>
+                  </div>
+                </div>
+                <div class="comp-card heart-side">
+                  <div class="comp-header"><i class="fa-regular fa-heart"></i> אבל הלב אומר:</div>
+                  <ul class="comp-list">
+                    <li><i class="fa-solid fa-angle-left"></i> תן לי הצלחה.</li>
+                    <li><i class="fa-solid fa-angle-left"></i> תן לי ביטחון.</li>
+                    <li><i class="fa-solid fa-angle-left"></i> תן לי יותר תענוג.</li>
+                    <li><i class="fa-solid fa-angle-left"></i> תפתור לי את הבעיות.</li>
+                    <li><i class="fa-solid fa-angle-left"></i> שמור על מה ששייך לי.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p class="profound-insight">
+                בעל הסולם אינו אומר שהדברים האלה פסולים כשלעצמם. הוא שואל שאלה הרבה יותר מפחידה:
+                <br>
+                <strong>כשאמרת "חיים" — למה התכוונת?</strong>
+              </p>
+            </div>
+          </div>
+
+          <!-- Section 2 -->
+          <div class="section-block">
+            <div class="section-number">2</div>
+            <div class="section-content">
+              <h3 class="section-title">ואז הוא מגדיר "חיים"</h3>
+              <p>
+                וזה החלק שאני רוצה שנשב עליו.
+              </p>
+              <p>
+                בעל הסולם כותב שכשאדם צועק <em>"כתבנו לחיים"</em>, פירוש החיים הוא:
+              </p>
+
+              <div class="focus-box gold-border">
+                <div class="focus-title">ההגדרה של בעל הסולם:</div>
+                <div class="focus-highlight">"להתדבק בחיי החיים"</div>
+                <p>
+                  והוא מקשר זאת לרצון לעבוד ב<strong>השפעה</strong>, ולא לכך שהמחשבות על הנאת עצמו יהיו מרכז עבודתו.
+                </p>
+                <div class="source-link-inline">
+                  <a href="https://kabbalah.academy/he/library/sources/articles/386/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> מעבר למקור במאמר שמעתי קכ"ב</a>
+                </div>
+              </div>
+
+              <p>
+                כלומר, ראש השנה מתחיל להפוך לנו את השאלה:
+              </p>
+
+              <div class="shift-box">
+                <div class="shift-from">
+                  <span class="shift-label">במקום:</span>
+                  <div class="shift-text">"בורא עולם, מה תיתן לי השנה?"</div>
+                </div>
+                <div class="shift-arrow"><i class="fa-solid fa-arrow-down-long"></i></div>
+                <div class="shift-to">
+                  <span class="shift-label">השאלה נעשית:</span>
+                  <div class="shift-text">"בורא עולם, באיזו צורה אחיה השנה?"</div>
+                </div>
+              </div>
+
+              <p>
+                וזה הבדל עצום. כי אפשר לקבל הרבה מאוד ועדיין להיות מרוחק. ואפשר לעבור מצבים לא פשוטים ובתוכם להתקרב לשוויון צורה.
+              </p>
+              <p class="key-equation">
+                לכן ה"חיים" שבעל הסולם מדבר עליהם אינם פשוט עוד שנה ביולוגית או שנה מוצלחת:
+                <br>
+                <span class="equation-badge">חיים = דבקות בחיי החיים</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Section 3 -->
+          <div class="section-block">
+            <div class="section-number">3</div>
+            <div class="section-content">
+              <h3 class="section-title">ועכשיו מגיע הקטע הקיצוני במאמר</h3>
+              <p>
+                בעל הסולם אומר: אם האדם פתאום קולט באמת מה הוא מבקש — <strong>הגוף עלול להיבהל.</strong>
+              </p>
+              <p>
+                למה? כי פתאום הוא שומע:
+                <br>
+                <em>"רגע... אתה באמת מבקש שלא טובתך העצמית תהיה המלך?"</em>
+              </p>
+              <p>
+                והרצון לקבל מצייר לאדם תמונה שחורה כאילו אם יוותר על שליטת הקבלה לעצמו, הוא עומד לאבד את כל העולם שלו. בעל הסולם מתאר אפילו ציור של אדם כאילו הוא נפרד מכל הבריות, המשפחה, הרכוש והתענוגים והולך לבדו למדבר. ואז הגוף <strong>"בועט בתפילה"</strong>.
+              </p>
+
+              <div class="clarification-card">
+                <div class="clarification-header">
+                  <i class="fa-solid fa-shield-halved"></i>
+                  <h4>וזה קריטי להבין נכון:</h4>
+                </div>
+                <p>
+                  בעל הסולם <strong>אינו אומר לנו לעזוב משפחה, רכוש, עבודה, אהבה או את החיים.</strong> להפך.
+                </p>
+                <p>
+                  הקטע מתאר כיצד הרצון לקבל <em>מצייר</em> את ההשפעה. האגו שומע "לא לעצמי" ומתרגם: <em>"אז לא יהיה לי כלום."</em>
+                </p>
+                <p class="highlight-text">
+                  וזו בדיוק התרמית שאנחנו צריכים להתחיל לזהות. תיקון הרצון לקבל אינו מחיקת הרצון לקבל. המטרה של חכמת הקבלה הרי איננה להרוס את הכלי. המטרה היא <strong>לתקן את הכוונה שעל הכלי</strong>.
+                </p>
+                <p>
+                  ולכן ייתכן שאדם ימשיך לאהוב, לבנות, ליצור, להרוויח, לאכול ארוחה טובה, ליהנות ממשפחתו ומהחיים — אבל מתחילה בו שאלה חדשה:
+                  <br>
+                  <strong class="profound-question">"בשביל מה אני משתמש בכל מה שקיבלתי?"</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4 -->
+          <div class="section-block">
+            <div class="section-number">4</div>
+            <div class="section-content">
+              <h3 class="section-title">ופה מתחילה הכנת הכלי האמיתית</h3>
+              <p>
+                בעל הסולם אומר שהסיבה שצריך את אלול היא שצריך <strong>הרגל</strong>.
+              </p>
+              <p>
+                הוא כותב שעל האדם להכין את עצמו עד שפיו ולבו יהיו שווים, ולהבין שקבלה לעצמו מביאה לפירוד ושעיקר הכיוון הוא דבקות דרך השפעה.
+              </p>
+              <div class="compassion-box">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <div class="compassion-text">
+                  <p>
+                    וזה יפה מאוד בעיניי משום שבעל הסולם לא דורש ממך היום: <em>"תהיה כבר כולך להשפיע."</em>
+                  </p>
+                  <p>
+                    אם זו הייתה הדרישה, רובנו היינו יכולים לסגור את הספר. הוא אומר: <strong>תתחיל להרגיל את הלב.</strong>
+                  </p>
+                  <p>
+                    יש בנו רצון לקבל עצום. לא מוחקים אותו בשמונה ימים. אבל אפשר לעשות דבר אחר: <strong>להפסיק לשקר לעצמנו לגביו.</strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </article>
+
+        <!-- Practical Workshop / Interactive Vessel Work -->
+        <section class="workshop-container">
+          
+          <div class="workshop-header">
+            <div class="workshop-badge"><i class="fa-solid fa-hammer"></i> עבודת הכלי המעשית</div>
+            <h3 class="workshop-title">עבודת הכלי שלנו להיום</h3>
+            <div class="disclaimer-note">
+              <i class="fa-solid fa-circle-info"></i>
+              <span><strong>הבחנה חשובה:</strong> מה שקראנו עד עכשיו הוא לימוד דברי בעל הסולם. התרגילים הבאים הם יישום שאני בונה עבורנו מתוך דבריו; הם אינם הוראות מפורשות שכתב בעל הסולם.</span>
+            </div>
+          </div>
+
+          <!-- Step A -->
+          <div class="exercise-card">
+            <div class="step-badge">שלב א'</div>
+            <div class="step-header">
+              <h4>אל תשנה שום רצון — גילוי הכלי האמיתי</h4>
+              <span class="step-time"><i class="fa-regular fa-clock"></i> 10–15 דקות בשקט</span>
+            </div>
+            <p class="step-instruction">
+              קח היום 10–15 דקות בשקט. כתוב בראש הדף:
+              <br>
+              <strong class="quote-prompt">"אם הייתי יכול להזמין היום את השנה המושלמת עבורי — מה הייתי מבקש?"</strong>
+            </p>
+            <p>
+              ותכתוב הכול. לא מה שמקובל על מקובל לומר. לא מה שנשמע רוחני. <strong>את האמת:</strong>
+              <br>
+              <span class="desire-tags">כסף? בריאות? אהבה? שקט? הצלחה? משפחה? הגשמה? השגה רוחנית? הכרה? ביטחון? פריצת דרך?</span>
+            </p>
+            <div class="instruction-alert">
+              <strong>אל תתקן שום דבר.</strong> היום אנחנו לא מתקנים את הרצון. אנחנו מגלים את הכלי.
+            </div>
+
+            <!-- Interactive Workspace for Step A -->
+            <div class="interactive-journal-box">
+              <label for="stepA-input"><i class="fa-solid fa-pen"></i> רשום כאן את רשימת הרצונות הגלויים והסמויים שלך (נשמר אוטומטית בדפדפן שלך):</label>
+              <textarea id="stepA-input" class="journal-textarea" placeholder="כתוב כאן בכנות גמורה את כל מה שאתה רוצה לעצמך לשנה הקרובה, ללא שום צנזורה..."></textarea>
+              <div class="save-status" id="stepA-status"><i class="fa-solid fa-check"></i> נשמר מקומית בדפדפן</div>
+            </div>
+          </div>
+
+          <!-- Step B -->
+          <div class="exercise-card">
+            <div class="step-badge">שלב ב'</div>
+            <div class="step-header">
+              <h4>ליד כל רצון כתוב: "בשביל מה?"</h4>
+            </div>
+            <p class="step-instruction">
+              נניח כתבת: <em>"אני רוצה שפע כלכלי."</em> אל תגיד: "אה, זה רצון לקבל, לא בסדר." ממש לא.
+              כתוב מתחת: <strong>למה?</strong>
+              ואז על התשובה שוב: <strong>ולמה אני רוצה את זה?</strong> ושוב.
+            </p>
+
+            <div class="example-box">
+              <div class="example-title"><i class="fa-solid fa-magnifying-glass"></i> דוגמה לבירור:</div>
+              <div class="example-flow">
+                <div class="flow-item">אני רוצה כסף.</div>
+                <div class="flow-arrow">← <em>למה?</em> כדי שלא אהיה בלחץ.</div>
+                <div class="flow-arrow">← <em>למה?</em> כדי שאוכל להיות פנוי.</div>
+                <div class="flow-arrow">← <em>למה?</em> כדי ליצור ולעשות דברים משמעותיים.</div>
+                <div class="flow-arrow">← <em>למה?</em> כי אני רוצה שהחיים שלי יועילו.</div>
+              </div>
+              <div class="example-note">
+                או אולי תגלה משהו אחר לחלוטין: <em>"אני רוצה כסף ← למה? כי אני רוצה להרגיש שאני שווה ← למה? כי אני רוצה שאנשים יראו שהצלחתי."</em>
+              </div>
+            </div>
+            <p class="step-reminder">
+              <strong>אל תשפוט שום תשובה.</strong> אנחנו רוצים לראות את החומר שממנו הבורא יצר את הכלי.
+            </p>
+
+            <!-- Interactive Workspace for Step B -->
+            <div class="interactive-journal-box">
+              <label for="stepB-input"><i class="fa-solid fa-diagram-project"></i> בירור ה"למה" של הרצונות שלך:</label>
+              <textarea id="stepB-input" class="journal-textarea" placeholder="בחר רצון מהרשימה וברר: למה אני רוצה אותו? ומה עומד מאחורי זה? ולמה?..."></textarea>
+              <div class="save-status" id="stepB-status"><i class="fa-solid fa-check"></i> נשמר מקומית בדפדפן</div>
+            </div>
+          </div>
+
+          <!-- Step C -->
+          <div class="exercise-card">
+            <div class="step-badge">שלב ג'</div>
+            <div class="step-header">
+              <h4>השאלה של בעל הסולם</h4>
+            </div>
+            <p class="step-instruction">
+              אחרי הרשימה, שב דקה בשקט. ואז שאל את עצמך:
+            </p>
+            <div class="quote-prompt-wrapper">
+              <div class="quote-prompt-large">
+                "אם בעל הסולם אומר ש'חיים' הם דבקות בחיי החיים — האם אני באמת רוצה את החיים האלה?"
+              </div>
+              <button class="deep-dive-trigger-btn" id="deep-dive-btn" onclick="toggleDeepDive()" aria-expanded="false">
+                <i class="fa-solid fa-lightbulb"></i>
+                <span class="btn-text">הסבר מעמיק: פירוק המושג "דבקות בחיי החיים" (10 נקודות)</span>
+                <i class="fa-solid fa-chevron-down arrow-icon" id="deep-dive-arrow"></i>
+              </button>
+            </div>
+
+            <!-- Deep Dive Collapsible Card -->
+            <div class="deep-dive-panel" id="deep-dive-panel">
+              <div class="deep-dive-header">
+                <div class="dd-badge"><i class="fa-solid fa-brain"></i> עיון עומק פנימי</div>
+                <h4>כן. המשפט הזה הוא הרבה יותר עמוק מ־“להיות קרוב לבורא”.</h4>
+                <p class="dd-source">
+                  בעל הסולם כותב בשמעתי קכ״ב: <em>"כתבנו לחיים", שפירוש "חיים" הוא בחינת להתדבק בחיי החיים.</em> 
+                  <a href="https://kabbalahmedia.info/he/events/cu/md3Zd5r9?activeTab=transcription&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">(מקור: Kabbalah Media)</a>
+                </p>
+                <div class="dd-intro-note">
+                  כדי להבין אותו באמת צריך לפרק שלוש מילים: <strong>חַיִּים — חַיֵּי הַחַיִּים — דְּבֵקוּת.</strong>
+                </div>
+              </div>
+
+              <div class="deep-dive-points">
+                
+                <!-- Point 1 -->
+                <div class="dd-point">
+                  <div class="dd-num">1</div>
+                  <div class="dd-body">
+                    <h5>"חיים" אינם עצם העובדה שאני קיים</h5>
+                    <p>
+                      בדרך הרגילה אנחנו קוראים "חיים" לכל מה שמתרחש בתוך האני: אני קיים, מרגיש, רוצה, אוהב, מפחד, יוצר, מרוויח, אוכל, בונה משפחה, נהנה.
+                    </p>
+                    <p>
+                      אבל מבחינת בעל הסולם, כל אלה עדיין יכולים להתרחש בתוך מערכת סגורה אחת:
+                      <br>
+                      <span class="loop-badge">אני רוצה ← אני מקבל ← אני מרגיש ← אני שוב רוצה</span>
+                    </p>
+                    <p>
+                      אפילו חיים מלאים מאוד יכולים להסתובב סביב נקודה אחת: <em>"מה נכנס לתוכי ומה יוצא לי מזה?"</em>
+                      <br>
+                      ובעל הסולם אומר: <strong>זה עדיין לא מלוא המושג הרוחני של חיים.</strong>
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Point 2 -->
+                <div class="dd-point">
+                  <div class="dd-num">2</div>
+                  <div class="dd-body">
+                    <h5>"חיי החיים" — המקור שממנו החיים נובעים</h5>
+                    <p>
+                      אפשר להבין את הביטוי כך: יש את החיים שאני מרגיש, ויש את מקור החיים עצמם.
+                    </p>
+                    <p>
+                      בעל הסולם מכנה את הבורא <strong>"חיי החיים"</strong> לא במובן של יצור גדול יותר שחי לנצח, אלא כמקור השפע, החיות, ההטבה והמציאות של הנבראים.
+                    </p>
+                    <p>
+                      ומכאן מגיע משהו מאוד מופשט:
+                      <br>
+                      הנברא מצד עצמו הוא רצון לקבל. הוא אינו מקור המילוי של עצמו. הוא חסר ← ולכן רוצה.
+                      <br>
+                      הבורא, לעומת זאת, מתואר אצל בעל הסולם כמי שאינו בעל חיסרון ולכן אין בו קבלה לעצמו; צורת פעולתו היא השפעה והטבה. בעל הסולם אומר במפורש שהדבקות הרוחנית אינה קירבה במרחב אלא השוואת הצורה. <a href="https://orhasulam.org/%D7%9E%D7%90%D7%9E%D7%A8-%D7%9C%D7%A1%D7%99%D7%95%D7%9D-%D7%94%D7%96%D7%94%D7%A8/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">(מאמר לסיום הזוהר — אור הסולם)</a>
+                    </p>
+                    <div class="insight-pill">
+                      <strong>להידבק בחיי החיים =</strong> שהצורה שבה אני חי תלך ותיעשה דומה לצורה של מקור החיים.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Point 3 -->
+                <div class="dd-point">
+                  <div class="dd-num">3</div>
+                  <div class="dd-body">
+                    <h5>אבל רגע — איך נברא יכול להיות דומה לבורא?</h5>
+                    <p>
+                      ופה נמצא אולי כל הסוד של חכמת הקבלה אצל בעל הסולם. כי אני רצון לקבל, ואילו הבורא הוא משפיע. אז לכאורה אנחנו הפכים מוחלטים.
+                    </p>
+                    <p>
+                      אם אהרוס את הרצון לקבל — כבר לא יהיה נברא. אם אשאיר אותו כמו שהוא — נשאר שינוי הצורה.
+                      <br>
+                      <strong>לכן לא משמידים את החומר. משנים את הצורה שעל החומר.</strong>
+                    </p>
+                    <div class="matter-form-box">
+                      <div><strong>החומר שלי:</strong> אני רוצה לקבל.</div>
+                      <div><strong>הצורה המקורית:</strong> אני רוצה לקבל כדי שאני אתמלא.</div>
+                      <div class="corrected-form"><strong>הצורה המתוקנת:</strong> אני מקבל, משתמש, חי ונהנה — אבל כל מערכת היחסים שלי עם הקבלה משתנה לכיוון של השפעה.</div>
+                    </div>
+                    <p class="shift-clarity">
+                      וזה הבדל עצום: לא <em>"אני לא רוצה יותר"</em>, אלא: <strong>"אני רוצה מאוד — אבל אני כבר לא רוצה שהרצון שלי יהיה מנותק מן המקור שנתן אותו."</strong>
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Point 4 -->
+                <div class="dd-point">
+                  <div class="dd-num">4</div>
+                  <div class="dd-body">
+                    <h5>ולכן "דבקות" איננה התמזגות או מחיקה</h5>
+                    <p>
+                      זה חשוב מאוד. בעל הסולם אינו מתאר מצב שבו האדם נעלם והופך לבורא. אין מחיקה של הנברא. אין התמוססות של האישיות לתוך איזו "אנרגיה קוסמית".
+                    </p>
+                    <p>
+                      הוא מגדיר דבקות באופן טכני כמעט:
+                      <br>
+                      <strong class="gold-quote">"דביקות — היא השוואת הצורה."</strong> <a href="https://search.orhasulam.org/Document/%D7%99%D7%A1%D7%95%D7%93%D7%95%D7%AA-%D7%94%D7%97%D7%9B%D7%9E%D7%94-%D7%A9%D7%90%D7%9C%D7%95%D7%AA-%D7%95%D7%AA%D7%A9%D7%95%D7%91%D7%95%D7%AA?id=220845&view=doc&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">(יסודות החכמה — אור הסולם)</a>
+                    </p>
+                    <p>
+                      שני דברים יכולים להישאר שניים ובכל זאת להיות דבוקים מבחינה רוחנית, אם הצורה שלהם שווה.
+                      <br>
+                      הנברא נשאר נברא, הבורא נשאר הבורא, אבל נוצרת השתוות בכיוון: <strong>הוא משפיע ← ואני רוצה שגם הקיום שלי יהיה משפיע.</strong> וזו הדבקות.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Point 5 -->
+                <div class="dd-point">
+                  <div class="dd-num">5</div>
+                  <div class="dd-body">
+                    <h5>עכשיו נלך עוד מדרגה עמוק יותר</h5>
+                    <p>
+                      "מוות" רוחני הוא לחיות מתוך עצמי כמערכת סגורה. לא מוות ביולוגי — אדם יכול להיות חי מאוד, מצליח מאוד, מרגיש מאוד, אבל כל תנועת החיים שלו היא: <strong>מהעולם ← אלי</strong>. אני נעשה נקודת הסיום של המציאות. הכול מגיע אליי, נמדד בי, ומסתיים בי.
+                    </p>
+                    <p>
+                      לעומת זאת: <strong>"חיים" מתחילים כאשר אני הופך מצינור סגור לחלק ממערכת החיים:</strong>
+                      <br>
+                      <span class="loop-badge gold-bg">מהבורא ← אל הנברא ← ודרך הנברא הלאה</span>
+                    </p>
+                    <p>
+                      אני עדיין מקבל. אבל הקבלה כבר אינה קבר שבו השפע נעצר — היא הופכת לחלק מזרימה.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Point 6 -->
+                <div class="dd-point">
+                  <div class="dd-num">6</div>
+                  <div class="dd-body">
+                    <h5>ובעל הסולם נותן משל מדהים בדיוק לזה — משל האיבר והגוף</h5>
+                    <p>
+                      ב"מאמר לסיום הזוהר" הוא נותן את משל האיבר והגוף: איבר המחובר לגוף משתתף בחיי הגוף כולו. כאשר הוא נחתך — הפירוד מנתק אותו מן הכללות. וכשהוא מתחבר בחזרה, הוא חוזר להיות חלק מן המערכת השלמה. זהו המשל שלו לדבקות ולהשוואת הצורה. <a href="https://orhasulam.org/%D7%9E%D7%90%D7%9E%D7%A8-%D7%9C%D7%A1%D7%99%D7%95%D7%9D-%D7%94%D7%96%D7%94%D7%A8/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">(אור הסולם)</a>
+                    </p>
+                    <div class="paradox-box">
+                      <p><strong>הפרדוקס היפהפה:</strong></p>
+                      <p>האגו אומר: <em>ככל שאקח יותר לעצמי ואהיה תלוי פחות באחרים — אהיה יותר חי.</em></p>
+                      <p>החכמה אומרת: <em>ככל שאתה מנותק יותר מן הכלל וממקור החיים — דווקא החיות הרוחנית הולכת ונעלמת.</em></p>
+                    </div>
+                    <p>
+                      והדבקות היא חזרה להשתייכות. לא ביטול האיבר, אלא שהאיבר מגלה שהחיים שלו נמצאים דווקא בהיותו חלק מן השלם.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Point 7 -->
+                <div class="dd-point">
+                  <div class="dd-num">7</div>
+                  <div class="dd-body">
+                    <h5>וזה נותן משמעות חדשה לגמרי למילה "אני"</h5>
+                    <p>
+                      במצב הראשון: <strong>אני = הרצונות שלי</strong> (כסף, אהבה, הצלחה, כבוד, רוחניות). העולם כולו נמדד לפי היחס שלו אליי.
+                    </p>
+                    <p>
+                      אבל בדבקות מתחילה להתפתח תפיסה אחרת: <strong>אני הוא המקום שבו הרצון של הבריאה יכול לקבל צורה של השפעה.</strong>
+                    </p>
+                    <p>
+                      שים לב — לא צריך למחוק את האני. האני מקבל תפקיד אחר. במקום: <em>"מה המציאות יכולה לתת לי?"</em>, מתחילה להתעורר שאלה:
+                      <br>
+                      <strong class="profound-inner-q">"בשביל מה קיבלתי את כל מה שאני?"</strong>
+                      <br>
+                      את הכישרונות שלי, הגוף שלי, הכסף שלי, המשפחה שלי, השכל שלי, אפילו את הרצונות העצומים שלי — ואז כל החומר של החיים נשאר, אבל הוא מקבל צורה אחרת.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Point 8 -->
+                <div class="dd-point">
+                  <div class="dd-num">8</div>
+                  <div class="dd-body">
+                    <h5>ולכן "חיי החיים" אינם מקום שאליו מגיעים</h5>
+                    <p>
+                      זה אולי החלק הכי מופשט. אנחנו רגילים לדמיין התקרבות לבורא כאילו: <em>אני פה ← הבורא שם ← אני מתקדם אליו</em>.
+                    </p>
+                    <p>
+                      אבל בעל הסולם שולל את המודל המרחבי הזה: <strong>ברוחניות אין "מרחק" במובן הפיזי; שינוי צורה מפריד והשוואת צורה מקרבת.</strong> <a href="https://orhasulam.org/%D7%9E%D7%90%D7%9E%D7%A8-%D7%9C%D7%A1%D7%99%D7%95%D7%9D-%D7%94%D7%96%D7%94%D7%A8/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">(אור הסולם)</a>
+                    </p>
+                    <div class="shift-comparison-mini">
+                      <div><strong>אתמול:</strong> אני משתמש בעולם כדי למלא את עצמי.</div>
+                      <div><strong>היום:</strong> אני מתחיל להשתמש בעצמי כדי להשתתף בהטבה.</div>
+                    </div>
+                    <p>
+                      לא השתנה המקום הפיזי — השתנתה הצורה שבלב. וזה המרחק הרוחני האמיתי.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Point 9 -->
+                <div class="dd-point">
+                  <div class="dd-num">9</div>
+                  <div class="dd-body">
+                    <h5>עכשיו אפשר להבין את "כתבנו לחיים" אחרת לחלוטין</h5>
+                    <p>
+                      כשאני אומר בראש השנה: <em>"כתבנו לחיים"</em>, בקריאה הרגילה שומעים: <em>"בורא עולם, שמור אותי בחיים עוד שנה."</em>
+                    </p>
+                    <p>
+                      אבל בעל הסולם לוקח את המשפט לעומק אחר: <strong>"תן לי להיכלל בחיים שלך."</strong>
+                      <br>
+                      כלומר: תן לרצון שלי לקבל צורת חיים שאינה נפרדת ממקור החיים — תן לי להתחיל לרצות כפי שמקור החיים רוצה: <strong>להיטיב</strong>.
+                    </p>
+                    <p>
+                      ולכן בעל הסולם אומר שהגוף מפחד מהתפילה הזאת <a href="https://kabbalahmedia.info/he/events/cu/md3Zd5r9?activeTab=transcription&utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer">(Kabbalah Media)</a>. כי עכשיו מבינים כמה היא רדיקלית: האדם חושב שהוא מבקש "תן לי חיים", ופתאום האגו מגלה שהבקשה האמיתית היא: <strong>"שנה את הגדרת החיים שלי."</strong>
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Point 10 -->
+                <div class="dd-point">
+                  <div class="dd-num">10</div>
+                  <div class="dd-body">
+                    <h5>והנה הנקודה שהיא העמוקה ביותר</h5>
+                    <p>
+                      <strong>הבורא אינו עוד דבר בתוך החיים שלי.</strong>
+                      <br>
+                      התפיסה הראשונית היא: יש לי עבודה, משפחה, כסף, אהבה, בריאות, חלומות — וגם בורא, ואני רוצה שהוא יעזור לי בהם.
+                    </p>
+                    <p>
+                      אבל ב"דבקות בחיי החיים", המערכת מתהפכת: <strong>החיים שלי נמצאים בתוך היחס לבורא.</strong>
+                      <br>
+                      ואז העבודה, המשפחה, הכסף, האהבה, הגוף והקשיים אינם מתחרים ברוחניות — <strong>הם החומר שלה!</strong>
+                    </p>
+                    <p>
+                      השאלה אינה: <em>"איך אברח מן העולם כדי להיות דבוק?"</em>, אלא:
+                      <br>
+                      <strong>"איזו צורה אני נותן לכל מה שהבורא שם בתוך החיים שלי? האם הדבר הזה ייגמר בי — או שיעבור דרכי?"</strong>
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Visual Synthesis -->
+              <div class="dd-synthesis-box">
+                <div class="syn-title"><i class="fa-solid fa-shapes"></i> זיקוק "דבקות בחיי החיים" לתמונה אחת:</div>
+                <div class="syn-grid">
+                  <div class="syn-card closed">
+                    <div class="syn-label">צורת החיים הראשונה (מערכת סגורה):</div>
+                    <div class="syn-diagram">המציאות ← <strong>אֲנִי</strong></div>
+                    <p>הכול מתנקז ומסתיים בנקודת ה"אני".</p>
+                  </div>
+                  <div class="syn-card open-flow">
+                    <div class="syn-label">צורת החיים המתוקנת (דבקות וזרימה):</div>
+                    <div class="syn-diagram">מקור החיים ← <strong>אֲנִי</strong> ← הזולת/הבריאה ← <strong>מקור החיים</strong></div>
+                    <p>אני עדיין מקבל ונהנה, אבל אני כבר לא קצה הצינור — אני חלק ממעגל החיים.</p>
+                  </div>
+                </div>
+                <p class="syn-conclusion">
+                  זהו העומק של "להתדבק בחיי החיים": לא רק שהבורא ייתן לי עוד חיים, אלא <strong>שהחיים שבתוכי יקבלו את צורתו של מקור החיים.</strong>
+                </p>
+              </div>
+
+              <!-- Chavruta Inquiry Box -->
+              <div class="dd-chavruta-question-card">
+                <div class="chavruta-q-header">
+                  <i class="fa-solid fa-comments"></i>
+                  <h5>שאלה עמוקה לבירור כחברותא (לפני המשך התרגיל):</h5>
+                </div>
+                <div class="chavruta-q-body">
+                  <p>
+                    <em>"אם מטרת הבריאה היא להיטיב לנבראיו והבורא דווקא רוצה שאני אקבל — אז למה הרצון שלי לקבל לעצמי יוצר פירוד ממנו?"</em>
+                  </p>
+                  <p class="chavruta-q-sub">
+                    כי לכאורה יש כאן סתירה עצומה: הוא רוצה לתת, אני רוצה לקבל — אז אנחנו אמורים להתאים באופן מושלם! והפתרון שבעל הסולם נותן לסתירה הזאת הוא, למעשה, המפתח לכל חכמת הקבלה.
+                  </p>
+                </div>
+              </div>
+
+              <div class="dd-close-wrapper">
+                <button class="btn btn-secondary" onclick="toggleDeepDive()"><i class="fa-solid fa-chevron-up"></i> סגור הסבר מעמיק</button>
+              </div>
+            </div>
+
+            <p>
+              לא: "מה התשובה הנכונה?" — אלא: <strong>האם אני באמת רוצה?</strong>
+            </p>
+
+            <div class="reflection-outcomes">
+              <div class="outcome-item">
+                <i class="fa-solid fa-check-circle"></i>
+                <span>ייתכן שהתשובה תהיה: <em>"חלק ממני מאוד רוצה. חלק אחר ממש לא."</em> — <strong>מצוין.</strong></span>
+              </div>
+              <div class="outcome-item">
+                <i class="fa-solid fa-check-circle"></i>
+                <span>ייתכן: <em>"אני רוצה גם את הבורא וגם שכל הדברים שלי יסתדרו."</em> — <strong>מצוין.</strong></span>
+              </div>
+              <div class="outcome-item">
+                <i class="fa-solid fa-check-circle"></i>
+                <span>ייתכן אפילו: <em>"אם להיות אמיתי, כרגע אני רוצה בעיקר שהבורא יסדר לי את החיים."</em> — <strong>גם זה חומר מצוין לעבודה.</strong></span>
+              </div>
+            </div>
+            <p class="truth-highlight">
+              כי עכשיו בפעם הראשונה <strong>יש אמת</strong>. והרי אי אפשר לתקן כלי שאיננו מוכנים לראות.
+            </p>
+          </div>
+
+          <!-- Section 5: Throughout the Day -->
+          <div class="exercise-card day-checkpoint">
+            <div class="step-badge-round">5</div>
+            <div class="step-header">
+              <h4>ויש שאלה אפילו עמוקה יותר</h4>
+            </div>
+            <p>
+              אני רוצה שתבדוק משהו במשך היום. בכל פעם שאתה רוצה משהו — אפילו דבר קטן:
+            </p>
+            <div class="daily-triggers">
+              <span>☕ קפה</span>
+              <span>📱 הודעה ממישהו</span>
+              <span>💼 הצלחה בפגישה</span>
+              <span>👏 מחמאה</span>
+              <span>🕊️ שקט</span>
+              <span>💬 תגובה מסוימת</span>
+              <span>🎯 משהו שיקרה בדיוק כפי שתכננת</span>
+            </div>
+            <p class="practice-rule">
+              אל תילחם ברצון. רק תבחין בו ותשאל:
+            </p>
+            <div class="two-questions-grid">
+              <div class="q-card">
+                <div class="q-num">שאלה 1</div>
+                <div class="q-content">"מי אמור ליהנות עכשיו?"</div>
+              </div>
+              <div class="q-card">
+                <div class="q-num">שאלה 2</div>
+                <div class="q-content">"האם יש דרך שבה אותו רצון עצמו יכול לשרת גם משהו מחוץ לי?"</div>
+              </div>
+            </div>
+            <p class="step-bottom-note">
+              לא לוותר על התענוג. לא לעשות מעצמך קדוש. רק להתחיל לחפש <strong>כוונה נוספת</strong>. זו תחילתו של שינוי צורה.
+            </p>
+          </div>
+
+          <!-- Section 6: Action -->
+          <div class="exercise-card action-card">
+            <div class="step-badge-round">6</div>
+            <div class="step-header">
+              <h4>העבודה הקטנה ביותר של היום</h4>
+            </div>
+            <p class="action-bold">
+              עשה היום פעולה אחת טובה שאף אחד לא צריך לדעת עליה. משהו אמיתי.
+            </p>
+            <ul class="action-rules">
+              <li><i class="fa-solid fa-xmark"></i> לא בשביל לקבל תודה.</li>
+              <li><i class="fa-solid fa-xmark"></i> לא בשביל לספר לי אחר כך איזה אדם טוב היית.</li>
+              <li><i class="fa-solid fa-xmark"></i> גם לא בשביל לומר לבורא: <em>"עשיתי מצווה, עכשיו תן לי."</em></li>
+            </ul>
+            <p class="action-aim">
+              <strong>פשוט פעולה אחת שבה אתה מנסה ליהנות דווקא מן העובדה שמישהו אחר קיבל.</strong>
+            </p>
+            <p>
+              ואז תתבונן בעצמך. ייתכן שתמצא שגם שם אתה רוצה סיפוק. זה בסדר. אנחנו לא מציגים הצגה. אנחנו לומדים את המכונה שנקראת הרצון לקבל.
+            </p>
+          </div>
+
+          <!-- Section 7: Night Reflection -->
+          <div class="exercise-card night-card">
+            <div class="step-badge-round"><i class="fa-solid fa-moon"></i> 7</div>
+            <div class="step-header">
+              <h4>לפני השינה — שלוש שורות בלבד</h4>
+            </div>
+            <p class="step-instruction">
+              לפני השינה, כתוב שלוש שורות אלו. לא צריך שזה יהיה יפה. צריך שזה יהיה <strong>אמת</strong>:
+            </p>
+
+            <div class="night-prompts-form">
+              <div class="form-row">
+                <label for="night-q1"><strong>א.</strong> היום גיליתי שאני באמת רוצה:</label>
+                <input type="text" id="night-q1" class="journal-input" placeholder="השלם את המשפט בכנות...">
+              </div>
+              <div class="form-row">
+                <label for="night-q2"><strong>ב.</strong> גיליתי שמתחת לרצון הזה מסתתר:</label>
+                <input type="text" id="night-q2" class="journal-input" placeholder="מה מסתתר מתחת לרצון הזה...">
+              </div>
+              <div class="form-row">
+                <label for="night-q3"><strong>ג.</strong> אילו הייתי מבקש היום "כתבנו לחיים" באמת, הייתי רוצה שהבורא יעזור לי:</label>
+                <input type="text" id="night-q3" class="journal-input" placeholder="הבקשה הפנימית האמיתית...">
+              </div>
+              <div class="save-status" id="night-status"><i class="fa-solid fa-check"></i> נשמר מקומית בדפדפן</div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Crucial Summary & Chavruta Section -->
+        <div class="summary-box">
+          <div class="summary-header">
+            <i class="fa-solid fa-star"></i>
+            <h3>והנה הדבר החשוב ביותר להיום</h3>
+          </div>
+          <p class="summary-text">
+            אני לא רוצה שתצא מהשיעור הזה במלחמה נגד הרצון לקבל. זו תהיה טעות. אנחנו הרי לומדים מבעל הסולם שמטרת הבריאה היא להיטיב לנבראיו. הבעיה אינה שהנברא רוצה לקבל את הטוב.
+          </p>
+          <div class="summary-points">
+            <div class="sp-item"><i class="fa-solid fa-compass"></i> העבודה היא על הצורה.</div>
+            <div class="sp-item"><i class="fa-solid fa-user-group"></i> מי המרכז? בשביל מי?</div>
+            <div class="sp-item"><i class="fa-solid fa-link"></i> מה הקבלה הזאת עושה לקשר שלי עם הבורא ועם הזולת?</div>
+          </div>
+          <p class="summary-conclusion">
+            ולכן היום אני לא מבקש ממך להיות פחות חי. להפך. אני רוצה שנתחיל לגלות: <strong>כיצד כל החיים שלך יכולים להפוך לכלי של דבקות.</strong>
+          </p>
+
+          <div class="white-black-note">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+            <span>
+              <strong>צידה לדרך:</strong> ובסוף מאמר קכ"ב בעל הסולם מוסיף נקודה שאני רוצה שנשמור לימים הבאים: העבודה אינה צריכה להיות תלויה בכך שהמצב מרגיש "לבן". גם כאשר מגיע שחור, האדם לומד לא להתנות את עבודתו בהרגשה הטובה שלו. <a href="https://kabbalah.academy/he/library/sources/articles/386/" target="_blank" rel="noopener noreferrer">(שמעתי קכ"ב)</a> עוד נגיע לזה.
+            </span>
+          </div>
+        </div>
+
+        <!-- Chavruta Starting Point -->
+        <div class="chavruta-card">
+          <div class="chavruta-header">
+            <div class="chavruta-icon"><i class="fa-solid fa-handshake-angle"></i></div>
+            <div>
+              <h3>ועכשיו — החברותא שלנו מתחילה באמת</h3>
+              <p class="chavruta-sub">
+                אני רוצה שלא תענה לי תשובה "קבלית". ענה לי כמו שאתה באמת יושב מול בעל הסולם והוא מסתכל עליך ושואל אותך:
+              </p>
+            </div>
+          </div>
+
+          <div class="chavruta-question">
+            "כשאתה אומר לעצמך: 'אני רוצה שנה טובה' —<br>
+            מהם חמשת הדברים שאתה באמת, באמת רוצה שיקרו לך בשנה הקרובה?"
+          </div>
+
+          <div class="chavruta-instructions">
+            <span>✓ תכתוב אותם בדיוק כפי שהם יוצאים</span>
+            <span>✓ בלי להפוך אותם להשפעה עדיין</span>
+            <span>✓ בלי לתקן</span>
+            <span>✓ בלי להתבייש ברצון לקבל</span>
+          </div>
+
+          <div class="five-desires-grid">
+            <div class="desire-row">
+              <span class="desire-num">1</span>
+              <input type="text" id="desire-1" class="journal-input" placeholder="הרצון האמיתי הראשון...">
+            </div>
+            <div class="desire-row">
+              <span class="desire-num">2</span>
+              <input type="text" id="desire-2" class="journal-input" placeholder="הרצון האמיתי השני...">
+            </div>
+            <div class="desire-row">
+              <span class="desire-num">3</span>
+              <input type="text" id="desire-3" class="journal-input" placeholder="הרצון האמיתי השלישי...">
+            </div>
+            <div class="desire-row">
+              <span class="desire-num">4</span>
+              <input type="text" id="desire-4" class="journal-input" placeholder="הרצון האמיתי הרביעי...">
+            </div>
+            <div class="desire-row">
+              <span class="desire-num">5</span>
+              <input type="text" id="desire-5" class="journal-input" placeholder="הרצון האמיתי החמישי...">
+            </div>
+          </div>
+          <div class="save-status" id="desires-status"><i class="fa-solid fa-check"></i> נשמר ביומן האישי</div>
+
+          <div class="chavruta-footer">
+            <p><strong>משם נתחיל להכין את הכלי.</strong></p>
+          </div>
+        </div>
+
+        <!-- Completion & Direct Export Section -->
+        <div class="completion-box">
+          <div class="completion-header">
+            <div class="comp-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="comp-text">
+              <h4>סיימת את תרגילי יום 1?</h4>
+              <p>תוכל להוריד בלחיצה אחת עותק מסודר של כל השאלות והתשובות שמילאת לקובץ טקסט במחשב, להעתיק ללוח או להדפיס למעקב אישי.</p>
+            </div>
+          </div>
+          <div class="completion-actions">
+            <button class="btn btn-primary btn-large" onclick="downloadJournalAsText()" title="הורד קובץ טקסט עם כל השאלות והתשובות שלך">
+              <i class="fa-solid fa-file-arrow-down"></i>
+              <span>הורד קובץ תשובות (TXT)</span>
+            </button>
+            <button class="btn btn-secondary btn-large" onclick="copyJournalToClipboard()" title="העתק את כל השאלות והתשובות ללוח">
+              <i class="fa-regular fa-copy"></i>
+              <span>העתק הכל ללוח</span>
+            </button>
+            <button class="btn btn-secondary btn-large" onclick="openJournalModal()" title="הצג סיכום מעוצב ונוח">
+              <i class="fa-solid fa-book-open-reader"></i>
+              <span>צפה בסיכום המלא</span>
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Modal for Export / View Journal -->
+  <div class="modal-backdrop" id="journal-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 1</h3>
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-journal-content">
+        <!-- Injected by JavaScript -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="downloadJournalAsText()"><i class="fa-solid fa-file-arrow-down"></i> הורד קובץ (TXT)</button>
+        <button class="btn btn-secondary" onclick="copyJournalToClipboard()"><i class="fa-regular fa-copy"></i> העתק טקסט</button>
+        <button class="btn btn-secondary" onclick="printJournal()"><i class="fa-solid fa-print"></i> הדפס / שמור כ-PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toast-msg">נשמר בהצלחה</div>
+
+  <!-- Scripts -->
+  <script src="days_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
