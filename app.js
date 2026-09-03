@@ -389,6 +389,89 @@ function toggleDeepDive() {
 }
 
 // --------------------------------------------------------------------------
+// AI Chavruta Panel & Prompt Copy Logic
+// --------------------------------------------------------------------------
+function toggleAiChavruta() {
+  const panel = document.getElementById('ai-chavruta-panel');
+  const btn = document.getElementById('ai-chavruta-btn');
+  const arrow = document.getElementById('ai-arrow-icon');
+
+  if (!panel) return;
+
+  const isOpen = panel.classList.toggle('open');
+  if (btn) {
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    btn.classList.toggle('active', isOpen);
+  }
+  if (arrow) {
+    arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+  }
+
+  if (isOpen) {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function copyAiPrompt() {
+  const promptEl = document.getElementById('ai-prompt-content');
+  const copyBtn = document.getElementById('copy-prompt-btn');
+  const copyText = document.getElementById('copy-prompt-text');
+  const copyIcon = document.getElementById('copy-prompt-icon');
+
+  if (!promptEl) return;
+  const textToCopy = promptEl.textContent || promptEl.innerText;
+
+  const handleSuccess = () => {
+    if (copyBtn) copyBtn.classList.add('copied');
+    if (copyText) copyText.textContent = 'הפרומפט הועתק ✓';
+    if (copyIcon) {
+      copyIcon.className = 'fa-solid fa-check';
+    }
+    showToast('הפרומפט הועתק ללוח בהצלחה! ✓');
+
+    setTimeout(() => {
+      if (copyBtn) copyBtn.classList.remove('copied');
+      if (copyText) copyText.textContent = 'העתק את הפרומפט';
+      if (copyIcon) {
+        copyIcon.className = 'fa-regular fa-copy';
+      }
+    }, 3000);
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(textToCopy)
+      .then(handleSuccess)
+      .catch(() => {
+        fallbackCopyText(textToCopy, handleSuccess);
+      });
+  } else {
+    fallbackCopyText(textToCopy, handleSuccess);
+  }
+}
+
+function fallbackCopyText(text, onSuccess) {
+  try {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.top = '-9999px';
+    textArea.style.left = '-9999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    const successful = document.execCommand('copy');
+    document.body.removeChild(textArea);
+    if (successful && onSuccess) {
+      onSuccess();
+    } else {
+      showToast('אנא סמן את הטקסט והעתק ידנית (Ctrl+C)');
+    }
+  } catch (err) {
+    showToast('אנא סמן את הטקסט והעתק ידנית (Ctrl+C)');
+  }
+}
+
+// --------------------------------------------------------------------------
 // Toast Notification
 // --------------------------------------------------------------------------
 function showToast(msg) {
@@ -400,3 +483,4 @@ function showToast(msg) {
     toast.classList.remove('show');
   }, 2500);
 }
+
