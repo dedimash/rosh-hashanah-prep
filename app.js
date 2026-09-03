@@ -23,6 +23,14 @@ function initNavigation() {
       }
     });
   });
+
+  // Check URL hash (e.g., #day-1 or #intro-view)
+  const hash = window.location.hash.replace('#', '');
+  if (hash && document.getElementById(hash)) {
+    switchTab(hash);
+  } else {
+    switchTab('intro-view');
+  }
 }
 
 function switchTab(targetId) {
