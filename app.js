@@ -58,6 +58,7 @@ function switchTab(targetId) {
 // Autosave Inputs to LocalStorage
 // --------------------------------------------------------------------------
 const INPUT_FIELDS = [
+  // Day 1
   { id: 'stepA-input', statusId: 'stepA-status' },
   { id: 'stepB-input', statusId: 'stepB-status' },
   { id: 'night-q1', statusId: 'night-status' },
@@ -67,7 +68,16 @@ const INPUT_FIELDS = [
   { id: 'desire-2', statusId: 'desires-status' },
   { id: 'desire-3', statusId: 'desires-status' },
   { id: 'desire-4', statusId: 'desires-status' },
-  { id: 'desire-5', statusId: 'desires-status' }
+  { id: 'desire-5', statusId: 'desires-status' },
+
+  // Day 2
+  { id: 'day2_stepA-input', statusId: 'day2_stepA-status' },
+  { id: 'day2_stepB-input', statusId: 'day2_stepB-status' },
+  { id: 'day2_stepC-input', statusId: 'day2_stepC-status' },
+  { id: 'day2_deep_question', statusId: 'day2_deep-status' },
+  { id: 'day2_night_q1', statusId: 'day2_night-status' },
+  { id: 'day2_night_q2', statusId: 'day2_night-status' },
+  { id: 'day2_night_q3', statusId: 'day2_night-status' }
 ];
 
 function initAutosave() {
@@ -214,21 +224,72 @@ function initJournalModal() {
   }
 }
 
-function openJournalModal() {
+function getActiveDayId() {
+  const activeSection = document.querySelector('.content-section.active');
+  if (activeSection && activeSection.id === 'day-2') {
+    return 'day-2';
+  }
+  return 'day-1';
+}
+
+function openJournalModal(dayId) {
+  const targetDay = dayId || getActiveDayId();
   const modal = document.getElementById('journal-modal');
   if (modal) {
-    renderJournalContent();
+    renderJournalContent(targetDay);
     modal.classList.add('open');
   }
 }
 
-function renderJournalContent() {
+function renderJournalContent(dayId) {
   const contentEl = document.getElementById('modal-journal-content');
   if (!contentEl) return;
 
+  const targetDay = dayId || getActiveDayId();
   const getVal = (id) => localStorage.getItem(`rh_prep_${id}`) || '(טרם נרשמה תשובה)';
 
-  const html = `
+  if (targetDay === 'day-2') {
+    contentEl.innerHTML = `
+      <div class="journal-summary">
+        <h4 style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--accent-gold); margin-bottom: 0.5rem;">
+          סיכום יום 2: „אני לדודי” — מה אני מביא אל הקשר? (שמעתי מ״ב)
+        </h4>
+        
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב א' — בירור פנימי: מה מתוך ה"אני" שלי אני מוכן לתת?</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day2_stepA-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ב' — התרגול המעשי: פעולה שלא תסתיים רק בי:</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day2_stepB-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ג' — התבוננות לאורך היום ("מה הייתי רוצה כאן אם 'אני לדודי' היה קודם?"):</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day2_stepC-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שאלת העומק של יום 2: האם הייתי רוצה להיות 'לדודי' גם ללא שום אור, קרבה או שכר?</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day2_deep_question')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>סגירת ערב — שלוש שורות לפני השינה:</strong>
+          <ul style="list-style: none; padding: 0; margin-top: 0.35rem; display: flex; flex-direction: column; gap: 0.3rem;">
+            <li><strong>א. היום גיליתי שה"אני" שלי נאחז במיוחד ב־:</strong> ${getVal('day2_night_q1')}</li>
+            <li><strong>ב. היה רגע אחד שבו הצלחתי לחשוב גם מחוץ לעצמי כש־:</strong> ${getVal('day2_night_q2')}</li>
+            <li><strong>ג. אם "אני לדודי" הוא עבודה אמיתית, הייתי רוצה שהבורא יעזור לי:</strong> ${getVal('day2_night_q3')}</li>
+          </ul>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  // Default: Day 1
+  contentEl.innerHTML = `
     <div class="journal-summary">
       <h4 style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--accent-gold); margin-bottom: 0.5rem;">
         סיכום יום 1: מה הם "חיים"? (שמעתי קכ"ב)
@@ -265,14 +326,61 @@ function renderJournalContent() {
       </div>
     </div>
   `;
-
-  contentEl.innerHTML = html;
 }
 
-function generateFormattedJournalText() {
+function generateFormattedJournalText(dayId) {
+  const targetDay = dayId || getActiveDayId();
   const getVal = (id) => localStorage.getItem(`rh_prep_${id}`) || '(לא נרשמה תשובה)';
   const dateStr = new Date().toLocaleDateString('he-IL', { year: 'numeric', month: 'numeric', day: 'numeric' });
 
+  if (targetDay === 'day-2') {
+    return `=====================================================
+הכנת הכלי לראש השנה — יומן עבודה אישי
+יום 2: „אני לדודי” — מה אני מביא אל הקשר? (בעל הסולם — שמעתי מ״ב)
+תאריך שמירה: ${dateStr}
+=====================================================
+
+【 שלב א' — בירור פנימי: מה מתוך ה"אני" שלי אני מוכן לתת? 】
+שאלה: "אם הבורא לא ישנה היום שום דבר בחיים החיצוניים שלי — מה מתוך ה'אני' שלי אני בכל זאת מוכן לתת לו?"
+תשובתך:
+${getVal('day2_stepA-input')}
+
+-----------------------------------------------------
+【 שלב ב' — התרגול המעשי: פעולה שלא תסתיים רק בי 】
+שאלה: איזו פעולה בחרת ומה גילית כשניסית לכוון אותה החוצה?
+תשובתך:
+${getVal('day2_stepB-input')}
+
+-----------------------------------------------------
+【 שלב ג' — התבוננות לאורך היום 】
+שאלה: "מה הייתי רוצה כאן אם 'אני לדודי' היה קודם ל'ודודי לי'?"
+תשובתך:
+${getVal('day2_stepC-input')}
+
+-----------------------------------------------------
+【 שאלת העומק של יום 2 】
+שאלה: "אם הבורא לא היה נותן לי שום הרגשת אור, קרבה, הצלחה או שכר — האם עדיין הייתי רוצה להיות 'לדודי'?"
+תשובתך:
+${getVal('day2_deep_question')}
+
+-----------------------------------------------------
+【 סגירת ערב — שלוש שורות לפני השינה 】
+א. היום גיליתי שה"אני" שלי נאחז במיוחד ב־:
+   ${getVal('day2_night_q1')}
+
+ב. היה רגע אחד שבו הצלחתי לחשוב גם מחוץ לעצמי כש־:
+   ${getVal('day2_night_q2')}
+
+ג. אם "אני לדודי" הוא עבודה אמיתית, הייתי רוצה שהבורא יעזור לי:
+   ${getVal('day2_night_q3')}
+
+=====================================================
+"בזה שה־אני מבטל את הרצון לקבל שלי לה', בבחינת כולו להשפיע, אז הוא זוכה ‘ודודי לי’."
+— בעל הסולם, שמעתי מ״ב
+=====================================================`;
+  }
+
+  // Day 1
   return `=====================================================
 הכנת הכלי לראש השנה — יומן עבודה אישי
 יום 1: מה הם "חיים"? (בעל הסולם — שמעתי קכ"ב)
@@ -331,10 +439,12 @@ ${getVal('stepB-input')}
 =====================================================`;
 }
 
-function downloadJournalAsText() {
-  const content = generateFormattedJournalText();
+function downloadJournalAsText(dayId) {
+  const targetDay = dayId || getActiveDayId();
+  const content = generateFormattedJournalText(targetDay);
   const dateSuffix = new Date().toISOString().slice(0, 10);
-  const filename = `הכנת_הכלי_יום_1_תשובות_${dateSuffix}.txt`;
+  const dayNum = targetDay === 'day-2' ? '2' : '1';
+  const filename = `הכנת_הכלי_יום_${dayNum}_תשובות_${dateSuffix}.txt`;
 
   // Create a Blob with UTF-8 BOM so Hebrew characters open properly in Windows Notepad
   const blob = new Blob(["\uFEFF" + content], { type: 'text/plain;charset=utf-8' });
@@ -347,11 +457,12 @@ function downloadJournalAsText() {
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
 
-  showToast('הקובץ עם כל השאלות והתשובות הורד בהצלחה! 📥');
+  showToast(`הקובץ עם תשובות יום ${dayNum} הורד בהצלחה! 📥`);
 }
 
-function copyJournalToClipboard() {
-  const text = generateFormattedJournalText();
+function copyJournalToClipboard(dayId) {
+  const targetDay = dayId || getActiveDayId();
+  const text = generateFormattedJournalText(targetDay);
 
   navigator.clipboard.writeText(text).then(() => {
     showToast('כל השאלות והתשובות הועתקו ללוח בהצלחה! 📋');
@@ -389,7 +500,7 @@ function toggleDeepDive() {
 }
 
 // --------------------------------------------------------------------------
-// AI Chavruta Panel & Prompt Copy Logic
+// AI Chavruta Panel & Prompt Copy Logic (Day 1 & Day 2)
 // --------------------------------------------------------------------------
 function toggleAiChavruta() {
   const panel = document.getElementById('ai-chavruta-panel');
@@ -427,7 +538,65 @@ function copyAiPrompt() {
     if (copyIcon) {
       copyIcon.className = 'fa-solid fa-check';
     }
-    showToast('הפרומפט הועתק ללוח בהצלחה! ✓');
+    showToast('הפרומפט ליום 1 הועתק ללוח בהצלחה! ✓');
+
+    setTimeout(() => {
+      if (copyBtn) copyBtn.classList.remove('copied');
+      if (copyText) copyText.textContent = 'העתק את הפרומפט';
+      if (copyIcon) {
+        copyIcon.className = 'fa-regular fa-copy';
+      }
+    }, 3000);
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(textToCopy)
+      .then(handleSuccess)
+      .catch(() => {
+        fallbackCopyText(textToCopy, handleSuccess);
+      });
+  } else {
+    fallbackCopyText(textToCopy, handleSuccess);
+  }
+}
+
+function toggleAiChavrutaDay2() {
+  const panel = document.getElementById('ai-chavruta-panel-day2');
+  const btn = document.getElementById('ai-chavruta-btn-day2');
+  const arrow = document.getElementById('ai-arrow-icon-day2');
+
+  if (!panel) return;
+
+  const isOpen = panel.classList.toggle('open');
+  if (btn) {
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    btn.classList.toggle('active', isOpen);
+  }
+  if (arrow) {
+    arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+  }
+
+  if (isOpen) {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function copyAiPromptDay2() {
+  const promptEl = document.getElementById('ai-prompt-content-day2');
+  const copyBtn = document.getElementById('copy-prompt-btn-day2');
+  const copyText = document.getElementById('copy-prompt-text-day2');
+  const copyIcon = document.getElementById('copy-prompt-icon-day2');
+
+  if (!promptEl) return;
+  const textToCopy = promptEl.textContent || promptEl.innerText;
+
+  const handleSuccess = () => {
+    if (copyBtn) copyBtn.classList.add('copied');
+    if (copyText) copyText.textContent = 'הפרומפט הועתק ✓';
+    if (copyIcon) {
+      copyIcon.className = 'fa-solid fa-check';
+    }
+    showToast('הפרומפט ליום 2 הועתק ללוח בהצלחה! ✓');
 
     setTimeout(() => {
       if (copyBtn) copyBtn.classList.remove('copied');
