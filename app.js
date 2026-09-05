@@ -77,7 +77,16 @@ const INPUT_FIELDS = [
   { id: 'day2_deep_question', statusId: 'day2_deep-status' },
   { id: 'day2_night_q1', statusId: 'day2_night-status' },
   { id: 'day2_night_q2', statusId: 'day2_night-status' },
-  { id: 'day2_night_q3', statusId: 'day2_night-status' }
+  { id: 'day2_night_q3', statusId: 'day2_night-status' },
+
+  // Day 3
+  { id: 'day3_stepA-input', statusId: 'day3_stepA-status' },
+  { id: 'day3_stepB-input', statusId: 'day3_stepB-status' },
+  { id: 'day3_stepC-input', statusId: 'day3_stepC-status' },
+  { id: 'day3_deep_question', statusId: 'day3_deep-status' },
+  { id: 'day3_night_q1', statusId: 'day3_night-status' },
+  { id: 'day3_night_q2', statusId: 'day3_night-status' },
+  { id: 'day3_night_q3', statusId: 'day3_night-status' }
 ];
 
 function initAutosave() {
@@ -226,8 +235,9 @@ function initJournalModal() {
 
 function getActiveDayId() {
   const activeSection = document.querySelector('.content-section.active');
-  if (activeSection && activeSection.id === 'day-2') {
-    return 'day-2';
+  if (activeSection) {
+    if (activeSection.id === 'day-3') return 'day-3';
+    if (activeSection.id === 'day-2') return 'day-2';
   }
   return 'day-1';
 }
@@ -247,6 +257,57 @@ function renderJournalContent(dayId) {
 
   const targetDay = dayId || getActiveDayId();
   const getVal = (id) => localStorage.getItem(`rh_prep_${id}`) || '(טרם נרשמה תשובה)';
+
+  const modalHeaderTitle = document.querySelector('.modal-header h3');
+  if (modalHeaderTitle) {
+    if (targetDay === 'day-3') {
+      modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 3';
+    } else if (targetDay === 'day-2') {
+      modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 2';
+    } else {
+      modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 1';
+    }
+  }
+
+  if (targetDay === 'day-3') {
+    contentEl.innerHTML = `
+      <div class="journal-summary">
+        <h4 style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--accent-gold); margin-bottom: 0.5rem;">
+          סיכום יום 3: לבנות חיסרון אמיתי (שמעתי קי״ז)
+        </h4>
+        
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב א' — בירור פנימי: מדידת הצמא (בקשה אחת בלבד):</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day3_stepA-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ב' — התרגול המעשי: זיהוי החיסרון הקיים ובניית חיסרון נוסף מעליו:</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day3_stepB-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ג' — התבוננות במהלך היום ("מה שכבר מנהל אותי" מול "מה שהייתי רוצה שינהל אותי"):</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day3_stepC-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שאלת העומק של יום 3: כמה חסרה לי הדבקות ב'חיי החיים' מול הדברים הגשמיים?</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day3_deep_question')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>סגירת ערב — שלוש שורות לפני השינה:</strong>
+          <ul style="list-style: none; padding: 0; margin-top: 0.35rem; display: flex; flex-direction: column; gap: 0.3rem;">
+            <li><strong>א. היום גיליתי שהדבר שהכי חסר לי בפועל הוא:</strong> ${getVal('day3_night_q1')}</li>
+            <li><strong>ב. החיסרון הנוסף שהייתי רוצה שייבנה בתוכי הוא:</strong> ${getVal('day3_night_q2')}</li>
+            <li><strong>ג. הבקשה שלי מהבורא בנוגע לצמא הפנימי שלי:</strong> ${getVal('day3_night_q3')}</li>
+          </ul>
+        </div>
+      </div>
+    `;
+    return;
+  }
 
   if (targetDay === 'day-2') {
     contentEl.innerHTML = `
@@ -332,6 +393,53 @@ function generateFormattedJournalText(dayId) {
   const targetDay = dayId || getActiveDayId();
   const getVal = (id) => localStorage.getItem(`rh_prep_${id}`) || '(לא נרשמה תשובה)';
   const dateStr = new Date().toLocaleDateString('he-IL', { year: 'numeric', month: 'numeric', day: 'numeric' });
+
+  if (targetDay === 'day-3') {
+    return `=====================================================
+הכנת הכלי לראש השנה — יומן עבודה אישי
+יום 3: לבנות חיסרון אמיתי (בעל הסולם — שמעתי קי״ז)
+תאריך שמירה: ${dateStr}
+=====================================================
+
+【 שלב א' — בירור פנימי: מדידת הצמא (בקשה אחת בלבד) 】
+שאלה: "אם הייתי יכול לבקש היום מהבורא דבר אחד בלבד — מה באמת הייתי מבקש? ולמה דווקא זה?"
+תשובתך:
+${getVal('day3_stepA-input')}
+
+-----------------------------------------------------
+【 שלב ב' — התרגול המעשי: לזהות את החיסרון הקיים ולבנות מעליו חיסרון נוסף 】
+שאלה: מה היה החיסרון הקיים, ואיזה חיסרון נוסף גילית שאתה רוצה שייבנה מעליו?
+תשובתך:
+${getVal('day3_stepB-input')}
+
+-----------------------------------------------------
+【 שלב ג' — התבוננות במהלך היום 】
+שאלה: "1. זה חסר לי עכשיו. 2. ומה הייתי רוצה שיחסר לי יותר?"
+תשובתך:
+${getVal('day3_stepC-input')}
+
+-----------------------------------------------------
+【 שאלת העומק של יום 3 】
+שאלה: "כמה בכלל חסרה לי הדבקות ב'חיי החיים' — מול הדברים הגשמיים שמטרידים אותי ביומיום?"
+תשובתך:
+${getVal('day3_deep_question')}
+
+-----------------------------------------------------
+【 סגירת ערב — שלוש שורות לפני השינה 】
+א. היום גיליתי שהדבר שהכי חסר לי בפועל הוא:
+   ${getVal('day3_night_q1')}
+
+ב. החיסרון הנוסף שהייתי רוצה שייבנה בתוכי הוא:
+   ${getVal('day3_night_q2')}
+
+ג. הבקשה שלי מהבורא בנוגע לצמא הפנימי שלי:
+   ${getVal('day3_night_q3')}
+
+=====================================================
+"אין האדם מרגיש שום חשיבות באיזה דבר, אם לא היה לו צורך להדבר."
+— בעל הסולם, שמעתי קי״ז
+=====================================================`;
+  }
 
   if (targetDay === 'day-2') {
     return `=====================================================
@@ -443,7 +551,9 @@ function downloadJournalAsText(dayId) {
   const targetDay = dayId || getActiveDayId();
   const content = generateFormattedJournalText(targetDay);
   const dateSuffix = new Date().toISOString().slice(0, 10);
-  const dayNum = targetDay === 'day-2' ? '2' : '1';
+  let dayNum = '1';
+  if (targetDay === 'day-2') dayNum = '2';
+  if (targetDay === 'day-3') dayNum = '3';
   const filename = `הכנת_הכלי_יום_${dayNum}_תשובות_${dateSuffix}.txt`;
 
   // Create a Blob with UTF-8 BOM so Hebrew characters open properly in Windows Notepad
@@ -597,6 +707,64 @@ function copyAiPromptDay2() {
       copyIcon.className = 'fa-solid fa-check';
     }
     showToast('הפרומפט ליום 2 הועתק ללוח בהצלחה! ✓');
+
+    setTimeout(() => {
+      if (copyBtn) copyBtn.classList.remove('copied');
+      if (copyText) copyText.textContent = 'העתק את הפרומפט';
+      if (copyIcon) {
+        copyIcon.className = 'fa-regular fa-copy';
+      }
+    }, 3000);
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(textToCopy)
+      .then(handleSuccess)
+      .catch(() => {
+        fallbackCopyText(textToCopy, handleSuccess);
+      });
+  } else {
+    fallbackCopyText(textToCopy, handleSuccess);
+  }
+}
+
+function toggleAiChavrutaDay3() {
+  const panel = document.getElementById('ai-chavruta-panel-day3');
+  const btn = document.getElementById('ai-chavruta-btn-day3');
+  const arrow = document.getElementById('ai-arrow-icon-day3');
+
+  if (!panel) return;
+
+  const isOpen = panel.classList.toggle('open');
+  if (btn) {
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    btn.classList.toggle('active', isOpen);
+  }
+  if (arrow) {
+    arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+  }
+
+  if (isOpen) {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function copyAiPromptDay3() {
+  const promptEl = document.getElementById('ai-prompt-content-day3');
+  const copyBtn = document.getElementById('copy-prompt-btn-day3');
+  const copyText = document.getElementById('copy-prompt-text-day3');
+  const copyIcon = document.getElementById('copy-prompt-icon-day3');
+
+  if (!promptEl) return;
+  const textToCopy = promptEl.textContent || promptEl.innerText;
+
+  const handleSuccess = () => {
+    if (copyBtn) copyBtn.classList.add('copied');
+    if (copyText) copyText.textContent = 'הפרומפט הועתק ✓';
+    if (copyIcon) {
+      copyIcon.className = 'fa-solid fa-check';
+    }
+    showToast('הפרומפט ליום 3 הועתק ללוח בהצלחה! ✓');
 
     setTimeout(() => {
       if (copyBtn) copyBtn.classList.remove('copied');
