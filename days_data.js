@@ -37,5 +37,14 @@ const DAYS_METADATA = [
     source: 'שמעתי רי״ג — "עניין גילוי החיסרון"',
     sourceUrl: 'https://kabbalahmedia.info/he/sources/QpHrSYsP',
     isAvailable: true
+  },
+  {
+    id: 'day-5',
+    dayNumber: 5,
+    title: 'לא להשאיר את המקום ריק',
+    date: '7.9.2026 • כ״ה אלול תשפ״ו',
+    source: 'שמעתי רכ״א — "רשות הכל"',
+    sourceUrl: 'https://kabbalahmedia.info/he/sources/1Grgyqyp',
+    isAvailable: true
   }
 ];

@@ -95,7 +95,16 @@ const INPUT_FIELDS = [
   { id: 'day4_deep_question', statusId: 'day4_deep-status' },
   { id: 'day4_night_q1', statusId: 'day4_night-status' },
   { id: 'day4_night_q2', statusId: 'day4_night-status' },
-  { id: 'day4_night_q3', statusId: 'day4_night-status' }
+  { id: 'day4_night_q3', statusId: 'day4_night-status' },
+
+  // Day 5
+  { id: 'day5_stepA-input', statusId: 'day5_stepA-status' },
+  { id: 'day5_stepB-input', statusId: 'day5_stepB-status' },
+  { id: 'day5_stepC-input', statusId: 'day5_stepC-status' },
+  { id: 'day5_deep_question', statusId: 'day5_deep-status' },
+  { id: 'day5_night_q1', statusId: 'day5_night-status' },
+  { id: 'day5_night_q2', statusId: 'day5_night-status' },
+  { id: 'day5_night_q3', statusId: 'day5_night-status' }
 ];
 
 function initAutosave() {
@@ -245,6 +254,7 @@ function initJournalModal() {
 function getActiveDayId() {
   const activeSection = document.querySelector('.content-section.active');
   if (activeSection) {
+    if (activeSection.id === 'day-5') return 'day-5';
     if (activeSection.id === 'day-4') return 'day-4';
     if (activeSection.id === 'day-3') return 'day-3';
     if (activeSection.id === 'day-2') return 'day-2';
@@ -270,7 +280,9 @@ function renderJournalContent(dayId) {
 
   const modalHeaderTitle = document.querySelector('.modal-header h3');
   if (modalHeaderTitle) {
-    if (targetDay === 'day-4') {
+    if (targetDay === 'day-5') {
+      modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 5';
+    } else if (targetDay === 'day-4') {
       modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 4';
     } else if (targetDay === 'day-3') {
       modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 3';
@@ -279,6 +291,46 @@ function renderJournalContent(dayId) {
     } else {
       modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 1';
     }
+  }
+
+  if (targetDay === 'day-5') {
+    contentEl.innerHTML = `
+      <div class="journal-summary">
+        <h4 style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--accent-gold); margin-bottom: 0.5rem;">
+          סיכום יום 5: לא להשאיר את המקום ריק (שמעתי רכ״א)
+        </h4>
+        
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב א' — בירור פנימי: אם הייתי מפסיק לעסוק ב"מה אני אקבל מזה" — במה הייתי רוצה שהמקום יתמלא:</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day5_stepA-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ב' — התרגול המעשי: פעולה אחת של נתינה שאין לה רווח ישיר:</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day5_stepB-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ג' — התבוננות במהלך היום (Daily Checkpoint):</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day5_stepC-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שאלת העומק של יום 5: באיזה תחום אני מוכן להכניס נתינה ואהבה ממשית שתמלא את המקום?</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day5_deep_question')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>סגירת ערב — שלוש שורות לפני השינה:</strong>
+          <ul style="list-style: none; padding: 0; margin-top: 0.35rem; display: flex; flex-direction: column; gap: 0.3rem;">
+            <li><strong>א. היום זיהיתי מקום שבו ה"אני" תפס הרבה שטח:</strong> ${getVal('day5_night_q1')}</li>
+            <li><strong>ב. הפעולה או המחשבה שבה ניסיתי למלא את המקום הזה בנתינה:</strong> ${getVal('day5_night_q2')}</li>
+            <li><strong>ג. התפילה שלי מהבורא שימלא את הכלי באהבה ובהשפעה:</strong> ${getVal('day5_night_q3')}</li>
+          </ul>
+        </div>
+      </div>
+    `;
+    return;
   }
 
   if (targetDay === 'day-4') {
@@ -445,6 +497,53 @@ function generateFormattedJournalText(dayId) {
   const targetDay = dayId || getActiveDayId();
   const getVal = (id) => localStorage.getItem(`rh_prep_${id}`) || '(לא נרשמה תשובה)';
   const dateStr = new Date().toLocaleDateString('he-IL', { year: 'numeric', month: 'numeric', day: 'numeric' });
+
+  if (targetDay === 'day-5') {
+    return `=====================================================
+הכנת הכלי לראש השנה — יומן עבודה אישי
+יום 5: לא להשאיר את המקום ריק (בעל הסולם — שמעתי רכ״א)
+תאריך שמירה: ${dateStr}
+=====================================================
+
+【 שלב א' — בירור פנימי: במה הייתי רוצה שהמקום יתמלא 】
+שאלה: "אם הייתי מפסיק לרגע לעסוק בשאלה 'מה אני אקבל מזה?' — במה הייתי רוצה שהמקום הזה יתמלא?"
+תשובתך:
+${getVal('day5_stepA-input')}
+
+-----------------------------------------------------
+【 שלב ב' — התרגול המעשי: פעולה אחת של נתינה ללא רווח ישיר 】
+שאלה: איזו פעולה של נתינה בחרת ומה חווית כשאמרת "אני מנסה למלא את המקום במשהו אחר"?
+תשובתך:
+${getVal('day5_stepB-input')}
+
+-----------------------------------------------------
+【 שלב ג' — התבוננות במהלך היום 】
+שאלה: 1. מה ממלא כרגע את המקום הזה? 2. איזו פעולה או אכפתיות יכולה למלא אותו בתוכן של השפעה?
+תשובתך:
+${getVal('day5_stepC-input')}
+
+-----------------------------------------------------
+【 שאלת העומק של יום 5 】
+שאלה: "באיזה תחום בחיי אני מוכן להפסיק להסתפק רק בהתרחקות מאהבה עצמית — ולהתחיל להכניס לתוכו נתינה, דאגה לזולת ואהבה ממשית שתמלא את המקום?"
+תשובתך:
+${getVal('day5_deep_question')}
+
+-----------------------------------------------------
+【 סגירת ערב — שלוש שורות לפני השינה 】
+א. היום זיהיתי מקום שבו ה"אני" תפס הרבה שטח, והוא:
+   ${getVal('day5_night_q1')}
+
+ב. הפעולה או המחשבה שבה ניסיתי למלא את המקום הזה בנתינה במקום להשאירו ריק:
+   ${getVal('day5_night_q2')}
+
+ג. התפילה שלי מהבורא שימלא את הכלי באהבה ובהשפעה:
+   ${getVal('day5_night_q3')}
+
+=====================================================
+"אין כלי יוצא מרשותו, אלא כשממלאים אותה בדבר אחר. אבל בריקנות אי אפשר לה להיות... לכן ההכרח הוא שימלאנה באהבה."
+— בעל הסולם, שמעתי רכ״א
+=====================================================`;
+  }
 
   if (targetDay === 'day-4') {
     return `=====================================================
@@ -654,6 +753,7 @@ function downloadJournalAsText(dayId) {
   if (targetDay === 'day-2') dayNum = '2';
   if (targetDay === 'day-3') dayNum = '3';
   if (targetDay === 'day-4') dayNum = '4';
+  if (targetDay === 'day-5') dayNum = '5';
   const filename = `הכנת_הכלי_יום_${dayNum}_תשובות_${dateSuffix}.txt`;
 
   // Create a Blob with UTF-8 BOM so Hebrew characters open properly in Windows Notepad
@@ -923,6 +1023,64 @@ function copyAiPromptDay4() {
       copyIcon.className = 'fa-solid fa-check';
     }
     showToast('הפרומפט ליום 4 הועתק ללוח בהצלחה! ✓');
+
+    setTimeout(() => {
+      if (copyBtn) copyBtn.classList.remove('copied');
+      if (copyText) copyText.textContent = 'העתק את הפרומפט';
+      if (copyIcon) {
+        copyIcon.className = 'fa-regular fa-copy';
+      }
+    }, 3000);
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(textToCopy)
+      .then(handleSuccess)
+      .catch(() => {
+        fallbackCopyText(textToCopy, handleSuccess);
+      });
+  } else {
+    fallbackCopyText(textToCopy, handleSuccess);
+  }
+}
+
+function toggleAiChavrutaDay5() {
+  const panel = document.getElementById('ai-chavruta-panel-day5');
+  const btn = document.getElementById('ai-chavruta-btn-day5');
+  const arrow = document.getElementById('ai-arrow-icon-day5');
+
+  if (!panel) return;
+
+  const isOpen = panel.classList.toggle('open');
+  if (btn) {
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    btn.classList.toggle('active', isOpen);
+  }
+  if (arrow) {
+    arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+  }
+
+  if (isOpen) {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function copyAiPromptDay5() {
+  const promptEl = document.getElementById('ai-prompt-content-day5');
+  const copyBtn = document.getElementById('copy-prompt-btn-day5');
+  const copyText = document.getElementById('copy-prompt-text-day5');
+  const copyIcon = document.getElementById('copy-prompt-icon-day5');
+
+  if (!promptEl) return;
+  const textToCopy = promptEl.textContent || promptEl.innerText;
+
+  const handleSuccess = () => {
+    if (copyBtn) copyBtn.classList.add('copied');
+    if (copyText) copyText.textContent = 'הפרומפט הועתק ✓';
+    if (copyIcon) {
+      copyIcon.className = 'fa-solid fa-check';
+    }
+    showToast('הפרומפט ליום 5 הועתק ללוח בהצלחה! ✓');
 
     setTimeout(() => {
       if (copyBtn) copyBtn.classList.remove('copied');
