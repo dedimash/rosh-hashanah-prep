@@ -285,7 +285,7 @@ function renderJournalContent(dayId) {
     contentEl.innerHTML = `
       <div class="journal-summary">
         <h4 style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--accent-gold); margin-bottom: 0.5rem;">
-          סיכום יום 4: לבחור איזה חיסרון אני רוצה להגדיל (שמעתי רי״ג)
+          סיכום יום 4: לברר איזה חיסרון צריך להיות היסוד (שמעתי רי״ג)
         </h4>
         
         <div style="margin-top: 1.25rem;">
@@ -304,7 +304,7 @@ function renderJournalContent(dayId) {
         </div>
 
         <div style="margin-top: 1.25rem;">
-          <strong>שאלת העומק של יום 4: איזה חיסרון אני באמת רוצה שיהפוך ליסוד של כל הבניין?</strong>
+          <strong>שאלת העומק של יום 4: עד כמה חסר לי שהבורא יהיה 'נגד עיניי', כאילו אני עומד בפני המלך?</strong>
           <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day4_deep_question')}</p>
         </div>
 
@@ -449,7 +449,7 @@ function generateFormattedJournalText(dayId) {
   if (targetDay === 'day-4') {
     return `=====================================================
 הכנת הכלי לראש השנה — יומן עבודה אישי
-יום 4: לבחור איזה חיסרון אני רוצה להגדיל (בעל הסולם — שמעתי רי״ג)
+יום 4: לברר איזה חיסרון צריך להיות היסוד (בעל הסולם — שמעתי רי״ג)
 תאריך שמירה: ${dateStr}
 =====================================================
 
@@ -472,7 +472,7 @@ ${getVal('day4_stepC-input')}
 
 -----------------------------------------------------
 【 שאלת העומק של יום 4 】
-שאלה: "מבין כל החסרונות שלי (כסף, שקט, הצלחה, ודאות, הערכה) — איזה חיסרון אני באמת רוצה שיהפוך ליסוד של כל הבניין?"
+שאלה: "בתוך כל החסרונות שמניעים אותי — כסף, שקט, הצלחה, ודאות והערכה — עד כמה חסר לי שהבורא יהיה ממש ‘נגד עיניי’, כאילו אני עומד בפני המלך?"
 תשובתך:
 ${getVal('day4_deep_question')}
 

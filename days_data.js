@@ -32,7 +32,7 @@ const DAYS_METADATA = [
   {
     id: 'day-4',
     dayNumber: 4,
-    title: 'לבחור איזה חיסרון להגדיל',
+    title: 'לברר איזה חיסרון צריך להיות היסוד',
     date: '6.9.2026 • כ״ד אלול תשפ״ו',
     source: 'שמעתי רי״ג — "עניין גילוי החיסרון"',
     sourceUrl: 'https://kabbalahmedia.info/he/sources/QpHrSYsP',
