@@ -325,7 +325,7 @@ function renderJournalContent(dayId) {
           <ul style="list-style: none; padding: 0; margin-top: 0.35rem; display: flex; flex-direction: column; gap: 0.3rem;">
             <li><strong>א. היום זיהיתי מקום שבו ה"אני" תפס הרבה שטח:</strong> ${getVal('day5_night_q1')}</li>
             <li><strong>ב. הפעולה או המחשבה שבה ניסיתי למלא את המקום הזה בנתינה:</strong> ${getVal('day5_night_q2')}</li>
-            <li><strong>ג. התפילה שלי מהבורא שימלא את הכלי באהבה ובהשפעה:</strong> ${getVal('day5_night_q3')}</li>
+            <li><strong>ג. הבקשה שלי מהבורא ביחס למקום הזה היא:</strong> ${getVal('day5_night_q3')}</li>
           </ul>
         </div>
       </div>
@@ -536,7 +536,7 @@ ${getVal('day5_deep_question')}
 ב. הפעולה או המחשבה שבה ניסיתי למלא את המקום הזה בנתינה במקום להשאירו ריק:
    ${getVal('day5_night_q2')}
 
-ג. התפילה שלי מהבורא שימלא את הכלי באהבה ובהשפעה:
+ג. הבקשה שלי מהבורא ביחס למקום הזה היא:
    ${getVal('day5_night_q3')}
 
 =====================================================
