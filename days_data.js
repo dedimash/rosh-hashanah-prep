@@ -28,5 +28,14 @@ const DAYS_METADATA = [
     source: 'שמעתי קי״ז — "יגעת ולא מצאת אל תאמין"',
     sourceUrl: 'https://kabbalah.academy/he/library/sources/articles/381/',
     isAvailable: true
+  },
+  {
+    id: 'day-4',
+    dayNumber: 4,
+    title: 'לבחור איזה חיסרון להגדיל',
+    date: '6.9.2026 • כ״ד אלול תשפ״ו',
+    source: 'שמעתי רי״ג — "עניין גילוי החיסרון"',
+    sourceUrl: 'https://kabbalahmedia.info/he/sources/QpHrSYsP',
+    isAvailable: true
   }
 ];
