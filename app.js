@@ -115,7 +115,18 @@ const INPUT_FIELDS = [
   { id: 'day6_deep_question', statusId: 'day6_deep-status' },
   { id: 'day6_night_q1', statusId: 'day6_night-status' },
   { id: 'day6_night_q2', statusId: 'day6_night-status' },
-  { id: 'day6_night_q3', statusId: 'day6_night-status' }
+  { id: 'day6_night_q3', statusId: 'day6_night-status' },
+
+  // Day 7
+  { id: 'day7_stepA-input', statusId: 'day7_stepA-status' },
+  { id: 'day7_stepB-input', statusId: 'day7_stepB-status' },
+  { id: 'day7_stepC-input', statusId: 'day7_stepC-status' },
+  { id: 'day7_stepD-input', statusId: 'day7_stepD-status' },
+  { id: 'day7_checkpoint-input', statusId: 'day7_checkpoint-status' },
+  { id: 'day7_deep_question', statusId: 'day7_deep-status' },
+  { id: 'day7_night_q1', statusId: 'day7_night-status' },
+  { id: 'day7_night_q2', statusId: 'day7_night-status' },
+  { id: 'day7_night_q3', statusId: 'day7_night-status' }
 ];
 
 function initAutosave() {
@@ -265,6 +276,7 @@ function initJournalModal() {
 function getActiveDayId() {
   const activeSection = document.querySelector('.content-section.active');
   if (activeSection) {
+    if (activeSection.id === 'day-7') return 'day-7';
     if (activeSection.id === 'day-6') return 'day-6';
     if (activeSection.id === 'day-5') return 'day-5';
     if (activeSection.id === 'day-4') return 'day-4';
@@ -292,7 +304,9 @@ function renderJournalContent(dayId) {
 
   const modalHeaderTitle = document.querySelector('.modal-header h3');
   if (modalHeaderTitle) {
-    if (targetDay === 'day-6') {
+    if (targetDay === 'day-7') {
+      modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 7';
+    } else if (targetDay === 'day-6') {
       modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 6';
     } else if (targetDay === 'day-5') {
       modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 5';
@@ -305,6 +319,56 @@ function renderJournalContent(dayId) {
     } else {
       modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 1';
     }
+  }
+
+  if (targetDay === 'day-7') {
+    contentEl.innerHTML = `
+      <div class="journal-summary">
+        <h4 style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--accent-gold); margin-bottom: 0.5rem;">
+          סיכום יום 7: להחזיק את המטה (שמעתי נ״ט)
+        </h4>
+        
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב א' — בירור פנימי: איפה ההרגשה שלי הפכה לפסק דין?</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day7_stepA-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ב' — להפריד עובדה ממסקנה: מהי העובדה ומהי המסקנה שהדעת בנתה עליה?</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day7_stepB-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ג' — אם ההרגשה אינה קובעת — מה כן חשוב לי?</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day7_stepC-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ד' — התרגול המעשי של היום: להחזיק את המטה בפעולה קטנה אחת</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day7_stepD-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>התבוננות במהלך היום (Daily Checkpoint):</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day7_checkpoint-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שאלת העומק של יום 7: אם לא אקבל שום הרגשה או הוכחה — האם אני עדיין רוצה להחזיק בחשיבות ההשפעה והדבקות?</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day7_deep_question')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>סגירת ערב — שלוש שורות לפני השינה:</strong>
+          <ul style="list-style: none; padding: 0; margin-top: 0.35rem; display: flex; flex-direction: column; gap: 0.3rem;">
+            <li><strong>א. היום הדעת שלי אמרה לי:</strong> ${getVal('day7_night_q1')}</li>
+            <li><strong>ב. כשבדקתי, גיליתי שהעובדה הייתה מול המסקנה:</strong> ${getVal('day7_night_q2')}</li>
+            <li><strong>ג. הפעולה הקטנה שבה ניסיתי לתת למטרה חשיבות גם בלי חיזוק מן ההרגשה:</strong> ${getVal('day7_night_q3')}</li>
+          </ul>
+        </div>
+      </div>
+    `;
+    return;
   }
 
   if (targetDay === 'day-6') {
@@ -561,6 +625,65 @@ function generateFormattedJournalText(dayId) {
   const targetDay = dayId || getActiveDayId();
   const getVal = (id) => localStorage.getItem(`rh_prep_${id}`) || '(לא נרשמה תשובה)';
   const dateStr = new Date().toLocaleDateString('he-IL', { year: 'numeric', month: 'numeric', day: 'numeric' });
+
+  if (targetDay === 'day-7') {
+    return `=====================================================
+הכנת הכלי לראש השנה — יומן עבודה אישי
+יום 7: להחזיק את המטה (בעל הסולם — שמעתי נ״ט)
+תאריך שמירה: ${dateStr}
+=====================================================
+
+【 שלב א' — בירור פנימי: איפה ההרגשה שלי הפכה לפסק דין? 】
+שאלה: "באיזה מקום בעבודה הפנימית שלי אני אומר לעצמי: בגלל שאני לא מרגיש / לא מבין / לא רואה תוצאה — כנראה שאין לזה ערך?"
+תשובתך:
+${getVal('day7_stepA-input')}
+
+-----------------------------------------------------
+【 שלב ב' — להפריד עובדה ממסקנה 】
+שאלה: "מהי העובדה במצב שבחרתי, ומהי המסקנה שהדעת שלי כבר בנתה עליה?"
+תשובתך:
+${getVal('day7_stepB-input')}
+
+-----------------------------------------------------
+【 שלב ג' — אם ההרגשה אינה קובעת — מה כן חשוב לי? 】
+שאלה: "גם אם לא אקבל היום שום הרגשה, סימן או הוכחה שמתגמלים אותי — איזו מטרה רוחנית אני עדיין רוצה להחזיק כחשובה?"
+תשובתך:
+${getVal('day7_stepC-input')}
+
+-----------------------------------------------------
+【 שלב ד' — התרגול המעשי של היום 】
+שאלה: "איזו פעולה בחרתי, ומה קרה כשהפסקתי לחכות קודם להרגשה שתצדיק אותה?"
+תשובתך:
+${getVal('day7_stepD-input')}
+
+-----------------------------------------------------
+【 התבוננות במהלך היום (Daily Checkpoint) 】
+שאלה: מה העובדה, מה המסקנה, האם היא מורידה מחשיבות המטרה, ואיזו פעולה מבטאת שהמטרה עדיין חשובה?
+תשובתך:
+${getVal('day7_checkpoint-input')}
+
+-----------------------------------------------------
+【 שאלת העומק של יום 7 】
+שאלה: "אם היום לא אקבל שום הרגשה, סימן או הוכחה שמחזקים אותי — האם אני עדיין רוצה להחזיק בחשיבות ההשפעה והדבקות, ולפעול בהתאם?"
+תשובתך:
+${getVal('day7_deep_question')}
+
+-----------------------------------------------------
+【 סגירת ערב — שלוש שורות לפני השינה 】
+א. היום הדעת שלי אמרה לי:
+   ${getVal('day7_night_q1')}
+
+ב. כשבדקתי, גיליתי שהעובדה הייתה ______ אבל המסקנה שלי הייתה ______:
+   ${getVal('day7_night_q2')}
+
+ג. הפעולה הקטנה שבה ניסיתי לתת למטרה חשיבות גם בלי חיזוק מן ההרגשה הייתה:
+   ${getVal('day7_night_q3')}
+
+=====================================================
+"מטה. היינו שכל השגותיו בנויים על בחינת מטה בחשיבות, שהוא סוד אמונה למעלה מהדעת."
+— בעל הסולם, שמעתי נ״ט, „עניין מטה ונחש”
+=====================================================`;
+  }
 
   if (targetDay === 'day-6') {
     return `=====================================================
@@ -878,6 +1001,7 @@ function downloadJournalAsText(dayId) {
   if (targetDay === 'day-4') dayNum = '4';
   if (targetDay === 'day-5') dayNum = '5';
   if (targetDay === 'day-6') dayNum = '6';
+  if (targetDay === 'day-7') dayNum = '7';
   const filename = `הכנת_הכלי_יום_${dayNum}_תשובות_${dateSuffix}.txt`;
 
   // Create a Blob with UTF-8 BOM so Hebrew characters open properly in Windows Notepad
@@ -1263,6 +1387,64 @@ function copyAiPromptDay6() {
       copyIcon.className = 'fa-solid fa-check';
     }
     showToast('הפרומפט ליום 6 הועתק ללוח בהצלחה! ✓');
+
+    setTimeout(() => {
+      if (copyBtn) copyBtn.classList.remove('copied');
+      if (copyText) copyText.textContent = 'העתק את הפרומפט';
+      if (copyIcon) {
+        copyIcon.className = 'fa-regular fa-copy';
+      }
+    }, 3000);
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(textToCopy)
+      .then(handleSuccess)
+      .catch(() => {
+        fallbackCopyText(textToCopy, handleSuccess);
+      });
+  } else {
+    fallbackCopyText(textToCopy, handleSuccess);
+  }
+}
+
+function toggleAiChavrutaDay7() {
+  const panel = document.getElementById('ai-chavruta-panel-day7');
+  const btn = document.getElementById('ai-chavruta-btn-day7');
+  const arrow = document.getElementById('ai-arrow-icon-day7');
+
+  if (!panel) return;
+
+  const isOpen = panel.classList.toggle('open');
+  if (btn) {
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    btn.classList.toggle('active', isOpen);
+  }
+  if (arrow) {
+    arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+  }
+
+  if (isOpen) {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function copyAiPromptDay7() {
+  const promptEl = document.getElementById('ai-prompt-content-day7');
+  const copyBtn = document.getElementById('copy-prompt-btn-day7');
+  const copyText = document.getElementById('copy-prompt-text-day7');
+  const copyIcon = document.getElementById('copy-prompt-icon-day7');
+
+  if (!promptEl) return;
+  const textToCopy = promptEl.textContent || promptEl.innerText;
+
+  const handleSuccess = () => {
+    if (copyBtn) copyBtn.classList.add('copied');
+    if (copyText) copyText.textContent = 'הפרומפט הועתק ✓';
+    if (copyIcon) {
+      copyIcon.className = 'fa-solid fa-check';
+    }
+    showToast('הפרומפט ליום 7 הועתק ללוח בהצלחה! ✓');
 
     setTimeout(() => {
       if (copyBtn) copyBtn.classList.remove('copied');

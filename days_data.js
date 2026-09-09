@@ -55,6 +55,15 @@ const DAYS_METADATA = [
     source: 'שמעתי א׳ — "אין עוד מלבדו"',
     sourceUrl: 'https://kabbalahmedia.info/he/sources/H8QG6GzN',
     isAvailable: true
+  },
+  {
+    id: 'day-7',
+    dayNumber: 7,
+    title: 'להחזיק את המטה',
+    date: '9.9.2026 • כ״ז אלול תשפ״ו',
+    source: 'שמעתי נ״ט — "עניין מטה ונחש"',
+    sourceUrl: 'https://kabbalahmedia.info/he/sources/8jddbZDS',
+    isAvailable: true
   }
 ];
 
