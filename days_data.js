@@ -46,5 +46,15 @@ const DAYS_METADATA = [
     source: 'שמעתי רכ״א — "רשות הכל"',
     sourceUrl: 'https://kabbalahmedia.info/he/sources/1Grgyqyp',
     isAvailable: true
+  },
+  {
+    id: 'day-6',
+    dayNumber: 6,
+    title: 'לא לברוח מן הדחייה',
+    date: '8.9.2026 • כ״ו אלול תשפ״ו',
+    source: 'שמעתי א׳ — "אין עוד מלבדו"',
+    sourceUrl: 'https://kabbalahmedia.info/he/sources/H8QG6GzN',
+    isAvailable: true
   }
 ];
+

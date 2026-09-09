@@ -104,7 +104,18 @@ const INPUT_FIELDS = [
   { id: 'day5_deep_question', statusId: 'day5_deep-status' },
   { id: 'day5_night_q1', statusId: 'day5_night-status' },
   { id: 'day5_night_q2', statusId: 'day5_night-status' },
-  { id: 'day5_night_q3', statusId: 'day5_night-status' }
+  { id: 'day5_night_q3', statusId: 'day5_night-status' },
+
+  // Day 6
+  { id: 'day6_stepA-input', statusId: 'day6_stepA-status' },
+  { id: 'day6_stepB-input', statusId: 'day6_stepB-status' },
+  { id: 'day6_stepC-input', statusId: 'day6_stepC-status' },
+  { id: 'day6_stepD-input', statusId: 'day6_stepD-status' },
+  { id: 'day6_checkpoint-input', statusId: 'day6_checkpoint-status' },
+  { id: 'day6_deep_question', statusId: 'day6_deep-status' },
+  { id: 'day6_night_q1', statusId: 'day6_night-status' },
+  { id: 'day6_night_q2', statusId: 'day6_night-status' },
+  { id: 'day6_night_q3', statusId: 'day6_night-status' }
 ];
 
 function initAutosave() {
@@ -254,6 +265,7 @@ function initJournalModal() {
 function getActiveDayId() {
   const activeSection = document.querySelector('.content-section.active');
   if (activeSection) {
+    if (activeSection.id === 'day-6') return 'day-6';
     if (activeSection.id === 'day-5') return 'day-5';
     if (activeSection.id === 'day-4') return 'day-4';
     if (activeSection.id === 'day-3') return 'day-3';
@@ -280,7 +292,9 @@ function renderJournalContent(dayId) {
 
   const modalHeaderTitle = document.querySelector('.modal-header h3');
   if (modalHeaderTitle) {
-    if (targetDay === 'day-5') {
+    if (targetDay === 'day-6') {
+      modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 6';
+    } else if (targetDay === 'day-5') {
       modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 5';
     } else if (targetDay === 'day-4') {
       modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 4';
@@ -291,6 +305,56 @@ function renderJournalContent(dayId) {
     } else {
       modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 1';
     }
+  }
+
+  if (targetDay === 'day-6') {
+    contentEl.innerHTML = `
+      <div class="journal-summary">
+        <h4 style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--accent-gold); margin-bottom: 0.5rem;">
+          סיכום יום 6: לא לברוח מן הדחייה (שמעתי א׳)
+        </h4>
+        
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב א' — בירור פנימי: מה בחיים שלי מרגיש כרגע כמו דחייה, תקיעות או חוסר ודאות?</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day6_stepA-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ב' — אל תדלג על החיסרון הראשון: אם המצב היה מסתדר בדיוק כפי שאני רוצה — מה הייתי רוצה שיקרה בפועל?</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day6_stepB-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ג' — לרדת שכבה אחת מתחת לתוצאה: מעבר לכך שאני רוצה שהמצב יסתדר — איזה חיסרון המצב הזה מגלה בי?</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day6_stepC-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ד' — התרגול המעשי של היום (רגע אחד של דחייה): מה קרה, מה גיליתי, ומה ביקשתי?</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day6_stepD-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>התבוננות במהלך היום (Daily Checkpoint):</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day6_checkpoint-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שאלת העומק של יום 6: כאשר דבר אינו מסתדר — האם אני מסוגל לראות איזה חיסרון עמוק יותר הדחייה מגלה בי?</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day6_deep_question')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>סגירת ערב — שלוש שורות לפני השינה:</strong>
+          <ul style="list-style: none; padding: 0; margin-top: 0.35rem; display: flex; flex-direction: column; gap: 0.3rem;">
+            <li><strong>א. הדחייה / חוסר הוודאות שבחרתי היום הייתה:</strong> ${getVal('day6_night_q1')}</li>
+            <li><strong>ב. מתחת לרצון שהמצב יסתדר, גיליתי שחסר לי גם:</strong> ${getVal('day6_night_q2')}</li>
+            <li><strong>ג. הבקשה הכנה שלי מהבורא בעקבות מה שגיליתי היא:</strong> ${getVal('day6_night_q3')}</li>
+          </ul>
+        </div>
+      </div>
+    `;
+    return;
   }
 
   if (targetDay === 'day-5') {
@@ -497,6 +561,65 @@ function generateFormattedJournalText(dayId) {
   const targetDay = dayId || getActiveDayId();
   const getVal = (id) => localStorage.getItem(`rh_prep_${id}`) || '(לא נרשמה תשובה)';
   const dateStr = new Date().toLocaleDateString('he-IL', { year: 'numeric', month: 'numeric', day: 'numeric' });
+
+  if (targetDay === 'day-6') {
+    return `=====================================================
+הכנת הכלי לראש השנה — יומן עבודה אישי
+יום 6: לא לברוח מן הדחייה (בעל הסולם — שמעתי א׳)
+תאריך שמירה: ${dateStr}
+=====================================================
+
+【 שלב א' — בירור פנימי: מה מרגיש לי כרגע כמו דחייה? 】
+שאלה: "מה בחיים שלי מרגיש כרגע כמו דחייה, תקיעות או חוסר ודאות?"
+תשובתך:
+${getVal('day6_stepA-input')}
+
+-----------------------------------------------------
+【 שלב ב' — אל תדלג על החיסרון הראשון 】
+שאלה: "אם המצב הזה היה יכול להסתדר עכשיו בדיוק כפי שאני רוצה — מה הייתי רוצה שיקרה בפועל?"
+תשובתך:
+${getVal('day6_stepB-input')}
+
+-----------------------------------------------------
+【 שלב ג' — לרדת שכבה אחת מתחת לתוצאה 】
+שאלה: "מעבר לכך שאני רוצה שהמצב יסתדר — איזה חיסרון המצב הזה מגלה בי?"
+תשובתך:
+${getVal('day6_stepC-input')}
+
+-----------------------------------------------------
+【 שלב ד' — התרגול המעשי של היום 】
+שאלה: "מה קרה, מה גיליתי, ומה ביקשתי?"
+תשובתך:
+${getVal('day6_stepD-input')}
+
+-----------------------------------------------------
+【 התבוננות במהלך היום (Daily Checkpoint) 】
+שאלה: מה המצב הזה מגלה שחסר לי מעבר לתוצאה עצמה, והאם נפתח מקום לבקשת עזרת הבורא?
+תשובתך:
+${getVal('day6_checkpoint-input')}
+
+-----------------------------------------------------
+【 שאלת העומק של יום 6 】
+שאלה: "כאשר דבר חשוב לי אינו מסתדר כפי שאני רוצה — האם אני מסוגל לא רק לבקש שהדחייה תיעלם, אלא גם לראות איזה חיסרון עמוק יותר היא מגלה בי?"
+תשובתך:
+${getVal('day6_deep_question')}
+
+-----------------------------------------------------
+【 סגירת ערב — שלוש שורות לפני השינה 】
+א. הדחייה / חוסר הוודאות שבחרתי היום הייתה:
+   ${getVal('day6_night_q1')}
+
+ב. מתחת לרצון שהמצב יסתדר, גיליתי שחסר לי גם:
+   ${getVal('day6_night_q2')}
+
+ג. הבקשה הכנה שלי מהבורא בעקבות מה שגיליתי היא:
+   ${getVal('day6_night_q3')}
+
+=====================================================
+"וזהו בחינת תיקון, הנקרא 'שמאל דוחה וימין מקרבת'. כלומר, מה שהשמאל דוחה, זה נכנס בגדר של תיקון. והתועלת מהדחיות הוא, שעל ידם האדם מקבל צורך ורצון שלם, שהקב״ה יעזור לו, כי אחרת הוא רואה שהוא אבוד."
+— בעל הסולם, שמעתי א׳, „אין עוד מלבדו”
+=====================================================`;
+  }
 
   if (targetDay === 'day-5') {
     return `=====================================================
@@ -754,6 +877,7 @@ function downloadJournalAsText(dayId) {
   if (targetDay === 'day-3') dayNum = '3';
   if (targetDay === 'day-4') dayNum = '4';
   if (targetDay === 'day-5') dayNum = '5';
+  if (targetDay === 'day-6') dayNum = '6';
   const filename = `הכנת_הכלי_יום_${dayNum}_תשובות_${dateSuffix}.txt`;
 
   // Create a Blob with UTF-8 BOM so Hebrew characters open properly in Windows Notepad
@@ -1081,6 +1205,64 @@ function copyAiPromptDay5() {
       copyIcon.className = 'fa-solid fa-check';
     }
     showToast('הפרומפט ליום 5 הועתק ללוח בהצלחה! ✓');
+
+    setTimeout(() => {
+      if (copyBtn) copyBtn.classList.remove('copied');
+      if (copyText) copyText.textContent = 'העתק את הפרומפט';
+      if (copyIcon) {
+        copyIcon.className = 'fa-regular fa-copy';
+      }
+    }, 3000);
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(textToCopy)
+      .then(handleSuccess)
+      .catch(() => {
+        fallbackCopyText(textToCopy, handleSuccess);
+      });
+  } else {
+    fallbackCopyText(textToCopy, handleSuccess);
+  }
+}
+
+function toggleAiChavrutaDay6() {
+  const panel = document.getElementById('ai-chavruta-panel-day6');
+  const btn = document.getElementById('ai-chavruta-btn-day6');
+  const arrow = document.getElementById('ai-arrow-icon-day6');
+
+  if (!panel) return;
+
+  const isOpen = panel.classList.toggle('open');
+  if (btn) {
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    btn.classList.toggle('active', isOpen);
+  }
+  if (arrow) {
+    arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+  }
+
+  if (isOpen) {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function copyAiPromptDay6() {
+  const promptEl = document.getElementById('ai-prompt-content-day6');
+  const copyBtn = document.getElementById('copy-prompt-btn-day6');
+  const copyText = document.getElementById('copy-prompt-text-day6');
+  const copyIcon = document.getElementById('copy-prompt-icon-day6');
+
+  if (!promptEl) return;
+  const textToCopy = promptEl.textContent || promptEl.innerText;
+
+  const handleSuccess = () => {
+    if (copyBtn) copyBtn.classList.add('copied');
+    if (copyText) copyText.textContent = 'הפרומפט הועתק ✓';
+    if (copyIcon) {
+      copyIcon.className = 'fa-solid fa-check';
+    }
+    showToast('הפרומפט ליום 6 הועתק ללוח בהצלחה! ✓');
 
     setTimeout(() => {
       if (copyBtn) copyBtn.classList.remove('copied');
