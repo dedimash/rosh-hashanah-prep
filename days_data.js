@@ -73,6 +73,15 @@ const DAYS_METADATA = [
     source: 'שמעתי מ״ב — "מהו, שראשי תיבות אלול ‘אני לדודי ודודי לי’ מרמזת בעבודה"',
     sourceUrl: 'https://kabbalahmedia.info/he/sources/cDko5YMK',
     isAvailable: true
+  },
+  {
+    id: 'day-9',
+    dayNumber: 9,
+    title: 'באיזה ספר אני מבקש להיכתב?',
+    date: '11.9.2026 • כ״ט אלול תשפ״ו',
+    source: 'שמעתי מ״ב — "מהו, שראשי תיבות אלול ‘אני לדודי ודודי לי’ מרמזת בעבודה"',
+    sourceUrl: 'https://kabbalahmedia.info/he/sources/cDko5YMK',
+    isAvailable: true
   }
 ];
 
