@@ -64,6 +64,15 @@ const DAYS_METADATA = [
     source: 'שמעתי נ״ט — "עניין מטה ונחש"',
     sourceUrl: 'https://kabbalahmedia.info/he/sources/8jddbZDS',
     isAvailable: true
+  },
+  {
+    id: 'day-8',
+    dayNumber: 8,
+    title: 'מה אני באמת רוצה להיות?',
+    date: '10.9.2026 • כ״ח אלול תשפ״ו',
+    source: 'שמעתי מ״ב — "מהו, שראשי תיבות אלול ‘אני לדודי ודודי לי’ מרמזת בעבודה"',
+    sourceUrl: 'https://kabbalahmedia.info/he/sources/cDko5YMK',
+    isAvailable: true
   }
 ];
 

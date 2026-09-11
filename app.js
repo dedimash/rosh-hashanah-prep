@@ -126,7 +126,20 @@ const INPUT_FIELDS = [
   { id: 'day7_deep_question', statusId: 'day7_deep-status' },
   { id: 'day7_night_q1', statusId: 'day7_night-status' },
   { id: 'day7_night_q2', statusId: 'day7_night-status' },
-  { id: 'day7_night_q3', statusId: 'day7_night-status' }
+  { id: 'day7_night_q3', statusId: 'day7_night-status' },
+
+  // Day 8
+  { id: 'day8_stepA-input', statusId: 'day8_stepA-status' },
+  { id: 'day8_stepB-input', statusId: 'day8_stepB-status' },
+  { id: 'day8_stepC-input', statusId: 'day8_stepC-status' },
+  { id: 'day8_stepD-input', statusId: 'day8_stepD-status' },
+  { id: 'day8_practice-input', statusId: 'day8_practice-status' },
+  { id: 'day8_checkpoint-input', statusId: 'day8_checkpoint-status' },
+  { id: 'day8_deep_question', statusId: 'day8_deep-status' },
+  { id: 'day8_request-input', statusId: 'day8_request-status' },
+  { id: 'day8_night_q1', statusId: 'day8_night-status' },
+  { id: 'day8_night_q2', statusId: 'day8_night-status' },
+  { id: 'day8_night_q3', statusId: 'day8_night-status' }
 ];
 
 function initAutosave() {
@@ -276,6 +289,7 @@ function initJournalModal() {
 function getActiveDayId() {
   const activeSection = document.querySelector('.content-section.active');
   if (activeSection) {
+    if (activeSection.id === 'day-8') return 'day-8';
     if (activeSection.id === 'day-7') return 'day-7';
     if (activeSection.id === 'day-6') return 'day-6';
     if (activeSection.id === 'day-5') return 'day-5';
@@ -304,7 +318,9 @@ function renderJournalContent(dayId) {
 
   const modalHeaderTitle = document.querySelector('.modal-header h3');
   if (modalHeaderTitle) {
-    if (targetDay === 'day-7') {
+    if (targetDay === 'day-8') {
+      modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 8';
+    } else if (targetDay === 'day-7') {
       modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 7';
     } else if (targetDay === 'day-6') {
       modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 6';
@@ -319,6 +335,66 @@ function renderJournalContent(dayId) {
     } else {
       modalHeaderTitle.innerHTML = '<i class="fa-solid fa-book-bookmark"></i> סיכום השאלות והתשובות שלך — יום 1';
     }
+  }
+
+  if (targetDay === 'day-8') {
+    contentEl.innerHTML = `
+      <div class="journal-summary">
+        <h4 style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--accent-gold); margin-bottom: 0.5rem;">
+          סיכום יום 8: מה אני באמת רוצה להיות? (שמעתי מ״ב)
+        </h4>
+        
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב א' — מה אני מבקש מן השנה החדשה:</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day8_stepA-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ב' — בשביל מה אני רוצה את זה ומה ארצה לעשות עם מה שאקבל:</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day8_stepB-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ג' — איזה אדם אני רוצה להיות עם מה שאקבל:</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day8_stepC-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שלב ד' — הבחירה: לדעת בבירור גמור מה אני רוצה:</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day8_stepD-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>התרגול המעשי — להשתמש היום במה שכבר ניתן לי:</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day8_practice-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>התבוננות במהלך היום (Daily Checkpoint):</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day8_checkpoint-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>שאלת העומק של יום 8: האם אני רוצה שהטוב רק ימלא אותי או שייבנה בי רצון להשתמש בו להשפעה ודבקות?</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day8_deep_question')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>בקשה אישית לבורא (אופציונלי):</strong>
+          <p style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; margin-top: 0.35rem; white-space: pre-wrap;">${getVal('day8_request-input')}</p>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <strong>סגירת ערב — שלוש שורות לפני השינה:</strong>
+          <ul style="list-style: none; padding: 0; margin-top: 0.35rem; display: flex; flex-direction: column; gap: 0.3rem;">
+            <li><strong>א. הדבר שאני באמת רוצה לקבל בשנה הקרובה הוא:</strong> ${getVal('day8_night_q1')}</li>
+            <li><strong>ב. כששאלתי „בשביל מה?”, גיליתי שאני רוצה אותו כדי:</strong> ${getVal('day8_night_q2')}</li>
+            <li><strong>ג. הכיוון שאני מבקש שייבנה בי עם מה שאקבל הוא:</strong> ${getVal('day8_night_q3')}</li>
+          </ul>
+        </div>
+      </div>
+    `;
+    return;
   }
 
   if (targetDay === 'day-7') {
@@ -625,6 +701,76 @@ function generateFormattedJournalText(dayId) {
   const targetDay = dayId || getActiveDayId();
   const getVal = (id) => localStorage.getItem(`rh_prep_${id}`) || '(לא נרשמה תשובה)';
   const dateStr = new Date().toLocaleDateString('he-IL', { year: 'numeric', month: 'numeric', day: 'numeric' });
+
+  if (targetDay === 'day-8') {
+    return `=====================================================
+הכנת הכלי לראש השנה — יומן עבודה אישי
+יום 8: מה אני באמת רוצה להיות? (בעל הסולם — שמעתי מ״ב)
+תאריך שמירה: ${dateStr}
+=====================================================
+
+【 שלב א' — אל תתקן עדיין את הרצונות שלך: מה הייתי מבקש מן השנה החדשה? 】
+שאלה: "אם השנה הקרובה הייתה יכולה לתת לי את הדברים שאני באמת רוצה — מה הייתי מבקש?"
+תשובתך:
+${getVal('day8_stepA-input')}
+
+-----------------------------------------------------
+【 שלב ב' — בשביל מה אני רוצה את זה? 】
+שאלה: "אם אקבל את הדבר הזה — מה אני באמת רוצה שהוא ייתן לי? ומה הייתי רוצה לעשות עם מה שקיבלתי?"
+תשובתך:
+${getVal('day8_stepB-input')}
+
+-----------------------------------------------------
+【 שלב ג' — איזה אדם אני רוצה להיות עם מה שאקבל? 】
+שאלה: "אם באמת אקבל את מה שאני מבקש — איזה אדם אני רוצה להיות עם הדבר הזה?"
+תשובתך:
+${getVal('day8_stepC-input')}
+
+-----------------------------------------------------
+【 שלב ד' — לדעת בבירור גמור מה אני רוצה 】
+שאלה: "מתוך כל מה שכתבתי עד עכשיו — איזה כיוון אני מבקש לבחור לשנה החדשה?"
+תשובתך:
+${getVal('day8_stepD-input')}
+
+-----------------------------------------------------
+【 התרגול המעשי — להשתמש היום במה שכבר ניתן לי 】
+שאלה: "במה השתמשתי, מה עשיתי איתו, ומה זה גילה לי על הכיוון שאני באמת רוצה?"
+תשובתך:
+${getVal('day8_practice-input')}
+
+-----------------------------------------------------
+【 התבוננות במהלך היום (Daily Checkpoint) 】
+שאלה: מה אני רוצה לקבל עכשיו? בשביל מה? איפה אני רוצה שהדבר יסתיים? ואיזה כיוון אני באמת בוחר ברגע הזה?
+תשובתך:
+${getVal('day8_checkpoint-input')}
+
+-----------------------------------------------------
+【 שאלת העומק של יום 8 】
+שאלה: "אם אקבל בשנה הקרובה את הכסף, האהבה, הבריאות, ההצלחה, הידע והיכולת שאני מבקש — האם אני רוצה שכל אלה רק ימלאו אותי, או שאני מבקש שייבנה בי גם רצון להשתמש בהם בצורה שמקרבת אותי להשפעה ולדבקות?"
+תשובתך:
+${getVal('day8_deep_question')}
+
+-----------------------------------------------------
+【 בקשה אישית לבורא (אופציונלי) 】
+תשובתך:
+${getVal('day8_request-input')}
+
+-----------------------------------------------------
+【 סגירת ערב — שלוש שורות לפני השינה 】
+א. הדבר שאני באמת רוצה לקבל בשנה הקרובה הוא:
+   ${getVal('day8_night_q1')}
+
+ב. כששאלתי „בשביל מה?”, גיליתי שאני רוצה אותו כדי:
+   ${getVal('day8_night_q2')}
+
+ג. הכיוון שאני מבקש שייבנה בי עם מה שאקבל הוא:
+   ${getVal('day8_night_q3')}
+
+=====================================================
+"האדם בעצמו צריך לעשות בחירה, ולדעת בבירור גמור, מה שהוא רוצה."
+— בעל הסולם, שמעתי מ״ב, „מהו, שראשי תיבות אלול ‘אני לדודי ודודי לי’ מרמזת בעבודה”
+=====================================================`;
+  }
 
   if (targetDay === 'day-7') {
     return `=====================================================
@@ -1002,6 +1148,7 @@ function downloadJournalAsText(dayId) {
   if (targetDay === 'day-5') dayNum = '5';
   if (targetDay === 'day-6') dayNum = '6';
   if (targetDay === 'day-7') dayNum = '7';
+  if (targetDay === 'day-8') dayNum = '8';
   const filename = `הכנת_הכלי_יום_${dayNum}_תשובות_${dateSuffix}.txt`;
 
   // Create a Blob with UTF-8 BOM so Hebrew characters open properly in Windows Notepad
@@ -1445,6 +1592,64 @@ function copyAiPromptDay7() {
       copyIcon.className = 'fa-solid fa-check';
     }
     showToast('הפרומפט ליום 7 הועתק ללוח בהצלחה! ✓');
+
+    setTimeout(() => {
+      if (copyBtn) copyBtn.classList.remove('copied');
+      if (copyText) copyText.textContent = 'העתק את הפרומפט';
+      if (copyIcon) {
+        copyIcon.className = 'fa-regular fa-copy';
+      }
+    }, 3000);
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(textToCopy)
+      .then(handleSuccess)
+      .catch(() => {
+        fallbackCopyText(textToCopy, handleSuccess);
+      });
+  } else {
+    fallbackCopyText(textToCopy, handleSuccess);
+  }
+}
+
+function toggleAiChavrutaDay8() {
+  const panel = document.getElementById('ai-chavruta-panel-day8');
+  const btn = document.getElementById('ai-chavruta-btn-day8');
+  const arrow = document.getElementById('ai-arrow-icon-day8');
+
+  if (!panel) return;
+
+  const isOpen = panel.classList.toggle('open');
+  if (btn) {
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    btn.classList.toggle('active', isOpen);
+  }
+  if (arrow) {
+    arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+  }
+
+  if (isOpen) {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function copyAiPromptDay8() {
+  const promptEl = document.getElementById('ai-prompt-content-day8');
+  const copyBtn = document.getElementById('copy-prompt-btn-day8');
+  const copyText = document.getElementById('copy-prompt-text-day8');
+  const copyIcon = document.getElementById('copy-prompt-icon-day8');
+
+  if (!promptEl) return;
+  const textToCopy = promptEl.textContent || promptEl.innerText;
+
+  const handleSuccess = () => {
+    if (copyBtn) copyBtn.classList.add('copied');
+    if (copyText) copyText.textContent = 'הפרומפט הועתק ✓';
+    if (copyIcon) {
+      copyIcon.className = 'fa-solid fa-check';
+    }
+    showToast('הפרומפט ליום 8 הועתק ללוח בהצלחה! ✓');
 
     setTimeout(() => {
       if (copyBtn) copyBtn.classList.remove('copied');
